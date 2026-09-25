@@ -2,7 +2,7 @@
 
 Star 的数据产品经理作品集，包含三个案例：数据接入与流通工作台、数仓前台、天气数据产品。首页提供三个可操作的合成数据 Demo：批次接入检查、受控找数和天气偏差判断。
 
-直接打开 `index.html` 即可浏览；仓库启用 GitHub Pages 后，也可作为静态网站发布。页面不依赖外部字体、脚本或图片。
+在线浏览：[GitHub Pages 作品集](https://yxsun0810.github.io/PMPortfolio_star/)；也可直接打开 `index.html` 本地预览。页面使用仓库内的 `styles.css`，不依赖第三方网络字体、脚本或图片。
 
 ## 内容口径
 

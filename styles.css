@@ -261,6 +261,9 @@ h1 em { color: var(--blue); font-style: normal; }
 .cover-label { position: relative; z-index: 2; display: flex; justify-content: space-between; color: rgba(255,255,255,.82); font-size: 9px; font-weight: 850; letter-spacing: .13em; }
 .cover-intake { color: #fff; background: linear-gradient(135deg, #235b8f, #142c56); }
 .cover-catalog { color: #fff; background: linear-gradient(140deg, #2b60a9, #3c5cc0); }
+.cover-image { padding: 0; background: #eef4fd; }
+.cover-image > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.cover-image .cover-label { position: absolute; inset: 0 0 auto; padding: 14px 16px 28px; color: #102c61; background: linear-gradient(#f7faffec, #f7faff00); }
 .cover-weather { color: #fff; background: linear-gradient(140deg, #178d8e, #24517a); }
 .mock-window { position: absolute; top: 56px; right: -8px; left: 33px; padding-bottom: 6px; border: 1px solid rgba(255,255,255,.45); border-radius: 9px; background: rgba(255,255,255,.96); box-shadow: 0 18px 35px rgba(5,21,51,.22); color: #263b57; transform: rotate(-2deg); }
 .mock-top { display: flex; align-items: center; gap: 4px; height: 32px; padding: 0 11px; border-bottom: 1px solid #e2e8f1; color: #7c8ca1; font-size: 9px; }

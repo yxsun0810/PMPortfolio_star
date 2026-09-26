@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>数据目录工作台｜完整体验 Demo</title>
+  <style>
+    :root{
+      --paper:#f6f4ef;--paper2:#efede7;--panel:#fff;--card:#fffefa;
+      --ink:#242721;--ink2:#596057;--ink3:#858b82;--line:#deded7;--line2:#c9cbc3;
+      --accent:#c8401b;--accent2:#1f5c4d;--green:#16805a;--green-bg:#eaf6f0;
+      --info:#2f6490;--info-bg:#edf5fb;--shadow:0 10px 28px rgba(36,39,33,.08);
+    }
+    *{box-sizing:border-box}html,body{height:100%}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei UI",sans-serif;font-size:13px;line-height:1.6}
+    button,input,select{font:inherit}button{cursor:pointer}
+    .top{height:54px;display:flex;align-items:center;gap:14px;padding:0 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+    .top h1{font-family:Georgia,"Songti SC",serif;font-size:19px;color:var(--accent2);margin:0;white-space:nowrap}
+    .top .sub{color:var(--ink3);font-size:12px}.grow{flex:1}.stat{color:var(--ink2)}.stat b{color:var(--accent2)}
+    .pill-btn{border:1px solid var(--line2);border-radius:999px;background:var(--card);padding:5px 12px;color:var(--ink2);text-decoration:none}
+    .layout{height:calc(100vh - 54px);display:grid;grid-template-columns:264px minmax(0,1fr)}
+    .tree{background:var(--panel);border-right:1px solid var(--line);overflow:auto;padding:10px 0 30px}
+    .layer{padding:9px 14px 5px;font-weight:700}.layer small{margin-left:6px;color:var(--ink3);font-weight:400}
+    .dot{display:inline-block;width:9px;height:9px;margin-right:8px;border-radius:3px;vertical-align:0}.ods{background:#3e6b7a}.std{background:#b8893a}.dwd{background:#1f5c4d}.dim{background:#7c6bae}.dws{background:#8a6420}.ads{background:#c8401b}
+    .table-link{display:flex;align-items:center;padding:6px 14px 6px 31px;border-left:2px solid transparent;color:var(--ink2)}
+    .table-link span:last-child{margin-left:auto;color:var(--ink3);font-size:11px}.table-link.active{border-left-color:var(--accent);background:var(--card);color:var(--accent2);font-weight:700}
+    .main{min-width:0;display:flex;flex-direction:column}.searchbar{padding:11px 28px;background:var(--panel);border-bottom:1px solid var(--line)}
+    .searchbox{display:flex;max-width:820px}.searchbox input{flex:1;height:40px;border:1.5px solid var(--accent2);border-radius:9px 0 0 9px;padding:0 13px;background:#fff}.searchbox button{height:40px;border:0;border-radius:0 9px 9px 0;padding:0 18px;background:var(--accent2);color:#fff;font-weight:700}
+    .detail{overflow:auto;padding:22px 28px 60px}.demo-note{max-width:1000px;margin-bottom:16px;padding:9px 12px;border:1px solid #e7c88a;border-radius:9px;background:#fff7df;color:#865f1f}
+    .head{display:flex;align-items:flex-start;gap:12px;max-width:1050px}.layer-chip{padding:4px 9px;border-radius:7px;background:#1f5c4d;color:#fff;font-size:11px;font-weight:700}
+    .head h2{margin:0;font-size:22px;font-family:Georgia,"Songti SC",serif}.raw{color:var(--ink3);font-family:Consolas,monospace;font-size:12px}.grow2{flex:1}
+    .status{border:1px solid var(--green);border-radius:999px;background:var(--green-bg);color:var(--green);padding:4px 10px;font-weight:700;white-space:nowrap}
+    .desc{max-width:900px;margin:10px 0 14px;color:var(--ink2);font-size:14px}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));max-width:900px;gap:9px;margin-bottom:14px}.kpi{padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--card)}.kpi span{display:block;color:var(--ink3);font-size:11px}.kpi b{display:block;margin-top:3px}
+    .lineage{max-width:1050px;margin-bottom:16px;padding:13px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.lineage-title{font-weight:700;font-size:14px;margin-bottom:9px}.lineage-grid{display:grid;grid-template-columns:minmax(0,1.25fr) 22px minmax(0,1fr) 22px minmax(0,.95fr);align-items:stretch;gap:6px}.lineage-stage{min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card)}.lineage-stage.self{border-color:#7cae9f;background:#eef8f4}.lineage-stage h3{margin:0 0 5px;font-size:11px;color:var(--accent2)}.lineage-source{display:flex;align-items:center;justify-content:space-between;gap:7px;padding:5px 0;border-top:1px solid var(--line);font-size:12px}.lineage-source:first-of-type{border-top:0}.lineage-source b{color:var(--ink)}.lineage-source code,.lineage-stage code{font:10px/1.4 Consolas,monospace;color:var(--ink3);overflow-wrap:anywhere}.lineage-stage strong{display:block;font-size:13px}.lineage-stage small{display:block;margin-top:4px;color:var(--ink3);font-size:11px}.lineage-arrow{display:grid;place-items:center;color:var(--ink3);font-size:18px}.route-kind{flex:none;padding:1px 6px;border-radius:99px;background:var(--info-bg);color:var(--info);font-size:10px;font-style:normal}.route-kind.csv{background:#f7efe0;color:#976a2c}.lineage-note{margin-top:7px;color:var(--ink3);font-size:11px}
+    .trace-first{margin-top:11px;padding-top:10px;border-top:1px solid var(--line)}.trace-first h3{margin:0 0 7px;font-size:12px}.trace-first h3 span{margin-left:6px;color:var(--ink3);font-weight:400}.trace-case{border:1px solid var(--line);border-radius:8px;background:var(--card);overflow:hidden}.trace-case+ .trace-case{margin-top:6px}.trace-case>summary{display:flex;align-items:center;gap:8px;list-style:none;padding:7px 10px;cursor:pointer}.trace-case>summary::-webkit-details-marker{display:none}.trace-case>summary::before{content:'＋';font-size:14px;color:var(--accent2)}.trace-case[open]>summary::before{content:'－'}.trace-case-title{font-weight:700;color:var(--ink)}.trace-case-hint{margin-left:auto;color:var(--ink3);font-size:11px}.trace-body{padding:0 10px 10px}.trace-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;list-style:none;padding:0;margin:2px 0 0}.trace-steps li{position:relative;min-width:0;padding:7px 8px;border:1px solid var(--line);border-radius:7px;background:#fff}.trace-steps li:not(:last-child)::after{content:'→';position:absolute;right:-9px;top:8px;z-index:1;color:var(--accent2);font-size:13px}.trace-steps b{display:block;font-size:11px}.trace-steps code{display:block;margin-top:3px;font:10px/1.4 Consolas,monospace;color:var(--ink3);overflow-wrap:anywhere}.trace-meta{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0}.trace-tag{padding:2px 7px;border-radius:999px;background:var(--green-bg);color:var(--green);font-size:11px}.trace-tag.wait{background:#fff2dc;color:#916210}.trace-proof{margin-top:6px;color:var(--ink2);font-size:11px}.trace-proof>summary{display:inline-block;padding:1px 0;color:var(--accent2);font-weight:600;cursor:pointer}.trace-proof>summary::before{content:'▸ ';color:var(--accent2)}.trace-proof[open]>summary::before{content:'▾ '}.trace-proof p{margin:5px 0}.trace-evidence{margin-top:5px}.trace-evidence a{color:var(--accent2);margin-right:10px}
+    .tabs{display:flex;max-width:1050px;border-bottom:1px solid var(--line)}.tab{border:0;border-bottom:3px solid transparent;background:transparent;padding:10px 14px;color:var(--ink3);font-weight:700}.tab.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+    .panel{display:none;max-width:1050px;padding-top:14px}.panel.active{display:block}
+    .small-change{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding:10px 12px;border:1px solid #a8c3d8;border-radius:9px;background:var(--info-bg);color:var(--info)}.small-change b{color:#234d70}.small-change span{font-size:12px}.small-change .grow{flex:1}
+    .primary{border:0;border-radius:8px;background:var(--accent2);color:#fff;padding:7px 12px;font-weight:700}.secondary{border:1px solid var(--line2);border-radius:8px;background:#fff;color:var(--ink2);padding:7px 11px}
+    .field-table{width:100%;border-collapse:collapse;border:1px solid var(--line);background:var(--panel)}th,td{padding:9px 10px;border-bottom:1px solid #ecece6;text-align:left;vertical-align:top}th{background:var(--paper2);color:var(--ink3);font-size:11px}.field-table tr:last-child td{border-bottom:0}.field-table tr.selected{background:#f0f7f4}.field-name{font-weight:700;color:var(--accent2)}.field-tech{display:block;color:var(--ink3);font:11px Consolas,monospace}.meaning{color:var(--ink2)}.mini{display:block;color:var(--ink3);font-size:11px}.check{width:17px;height:17px;accent-color:var(--accent2)}
+    .use-box{display:none;margin-top:12px;border:1px solid #87ac9f;border-radius:11px;background:#fbfffd;box-shadow:var(--shadow);overflow:hidden}.use-box.open{display:block}.use-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #d6e5df}.use-head h3{margin:0;font-size:14px}.use-head span{color:var(--ink3);font-size:12px}.use-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px}.form-row{display:grid;grid-template-columns:118px 1fr;align-items:center;gap:9px;margin-bottom:9px}.form-row label{color:var(--ink2)}.form-row input,.form-row select{height:34px;border:1px solid var(--line2);border-radius:7px;background:#fff;padding:0 9px;min-width:0}.selected-fields{min-height:34px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--accent2);font-size:12px;word-break:break-word}.mapping-note{margin:0;color:var(--ink3);font-size:11px}
+    .code-card{padding:12px;border-radius:9px;background:#15201d;color:#d9eee6}.code-card .label{display:flex;justify-content:space-between;color:#8fb3a6;font-size:11px}.code-switch{display:flex;gap:6px;margin-top:10px}.code-switch button{border:1px solid #526f65;border-radius:7px;background:transparent;color:#a9c5bb;padding:5px 9px;font-size:11px}.code-switch button.active{border-color:#8bc7b2;background:#29483e;color:#fff}.code-card pre{min-height:110px;margin:9px 0 12px;white-space:pre-wrap;word-break:break-word;font:12px/1.6 Consolas,monospace}.copy{border:1px solid #668b7e;border-radius:7px;background:transparent;color:#d9eee6;padding:6px 10px}.warning{margin-top:9px;color:#a7b9b2;font-size:11px}
+    .sample-note{margin-bottom:10px;color:var(--ink2)}.sample-note b{color:#9a6417}.sample-wrap{overflow:auto}.sample{min-width:760px;width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line)}
+    .ask-workbench{max-width:1050px;margin:0 0 16px;padding:16px;border:1px solid #9bb9ad;border-radius:13px;background:#fff;box-shadow:var(--shadow)}.ask-heading{display:flex;align-items:center;gap:10px}.ask-heading h2{margin:0;font-size:19px}.demo-badge{margin-left:auto;padding:3px 8px;border-radius:99px;background:#fff2dc;color:#875d10;font-size:11px}.ask-sub{margin:3px 0 10px;color:var(--ink2);font-size:12px}.ask-message{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border-radius:9px;background:var(--paper2)}.ask-message b{flex:none;color:var(--accent2)}.ask-message span{font-size:13px}.ask-clarify{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:11px 0}.ask-clarify[hidden]{display:none}.ask-clarify strong{margin-right:3px;font-size:12px}.scope-choice{border:1px solid var(--line2);border-radius:99px;background:#fff;padding:5px 10px;color:var(--ink2)}.scope-choice.active{border-color:var(--accent2);background:#eaf6f0;color:var(--accent2);font-weight:700}.ask-result-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(250px,.85fr);gap:13px}.source-card{padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--card)}.source-card+.source-card{margin-top:9px}.source-top{display:flex;align-items:flex-start;gap:8px}.source-top h3{margin:0;font-size:14px}.source-top p{margin:2px 0 0;color:var(--ink3);font-size:11px}.source-top .grow{min-width:6px}.source-tag{padding:2px 7px;border-radius:99px;background:var(--green-bg);color:var(--green);font-size:10px;white-space:nowrap}.source-tag.alt{background:#f3eee4;color:#876328}.source-tech{display:block;margin:7px 0 9px;color:var(--ink3);font:10px/1.4 Consolas,monospace;overflow-wrap:anywhere}.source-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.field-add{display:flex;align-items:center;gap:5px;min-width:0;padding:6px 7px;border:1px solid var(--line);border-radius:7px;background:#fff;text-align:left}.field-add:hover,.field-add:focus-visible{border-color:var(--accent2)}.field-add[aria-pressed="true"]{background:var(--green-bg);border-color:#b5d7c7}.field-add b{flex:none;color:var(--accent2);font-size:15px;line-height:1}.field-add span{min-width:0;font-weight:700}.field-add small{margin-left:auto;color:var(--ink3);font-size:10px;white-space:nowrap}.source-footer{display:flex;align-items:center;gap:8px;margin-top:9px}.source-footer small{color:var(--ink3)}.bundle-button{border:0;background:none;color:var(--accent2);padding:2px 0;font-weight:700}.cart-box{align-self:start;padding:12px;border:1px solid #b9d1c8;border-radius:9px;background:#f8fcfa}.cart-head{display:flex;align-items:center;gap:6px}.cart-head h3{margin:0;font-size:14px}.cart-head span{margin-left:auto;color:var(--accent2);font-weight:700}.cart-empty{padding:14px 0;color:var(--ink3);font-size:12px}.cart-group{margin-top:9px}.cart-group-title{margin-bottom:4px;color:var(--ink2);font-size:11px;font-weight:700}.cart-item{display:flex;align-items:center;gap:5px;padding:5px 6px;border-bottom:1px solid #e1ebe5}.cart-item span{flex:1}.cart-item small{color:var(--ink3)}.cart-item button{border:0;background:none;color:#9b4933;font-size:17px;line-height:1}.cart-warning{margin:9px 0;color:#946725;font-size:11px}.cart-actions{margin-top:10px}.cart-actions .primary{width:100%}.cart-actions .primary:disabled{background:#adb9b3;cursor:not-allowed}.prompt-output{margin-top:11px;padding:12px;border:1px solid #a6c8b8;border-radius:9px;background:#f8fcfa}.prompt-output[hidden],.ask-response[hidden]{display:none}.prompt-head{display:flex;align-items:center;gap:8px}.prompt-head h3{margin:0;font-size:13px}.prompt-head .grow{flex:1}.prompt-output pre{max-height:260px;overflow:auto;margin:9px 0;padding:10px;border-radius:7px;background:#17241e;color:#e2f3e9;white-space:pre-wrap;word-break:break-word;font:11px/1.5 Consolas,monospace}.prompt-note{margin:8px 0 0;color:var(--ink3);font-size:11px}.catalog-drawer{max-width:1050px;margin-top:14px}.catalog-drawer>summary{cursor:pointer;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--accent2);font-weight:700}.catalog-drawer[open]>summary{margin-bottom:14px}
+    .toast{position:fixed;right:24px;bottom:24px;padding:10px 14px;border-radius:8px;background:#1f2925;color:#fff;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:none}
+    .ask-fab{position:fixed;right:22px;bottom:22px;z-index:55;display:flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 17px;background:var(--accent2);color:#fff;box-shadow:0 12px 26px rgba(31,92,77,.25);font-weight:700}.ask-fab:hover,.ask-fab:focus-visible{background:#174c3f}.ask-fab-icon{display:grid;place-items:center;width:23px;height:23px;border-radius:7px;background:#fff;color:var(--accent2);font-size:15px}.ask-workbench{position:fixed;right:22px;bottom:82px;z-index:54;width:min(570px,calc(100vw - 32px));height:min(690px,calc(100vh - 105px));max-width:none;margin:0;padding:0;display:flex;flex-direction:column;overflow:hidden;border-radius:15px;box-shadow:0 18px 48px rgba(25,39,33,.24)}.ask-workbench[hidden]{display:none}.chat-head{display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fff}.chat-head h2{margin:0;font-size:16px}.chat-head p{margin:0;color:var(--ink3);font-size:10px}.chat-head .demo-badge{margin-left:auto}.chat-cart-count{border:1px solid #b7d5c8;border-radius:99px;background:#f2faf5;color:var(--accent2);padding:2px 7px;font-size:10px;white-space:nowrap}.chat-close{border:0;background:transparent;color:var(--ink2);font-size:23px;line-height:1;padding:2px 5px}.chat-body{flex:1;min-height:0;overflow:auto;padding:14px;background:#f7f8f5}.chat-welcome{display:flex;gap:8px;align-items:flex-start}.chat-avatar{flex:none;display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--accent2);color:#fff;font-weight:700;font-size:12px}.chat-bubble{max-width:88%;padding:9px 11px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:12px}.chat-welcome .chat-bubble{max-width:94%}.chat-row{display:flex;gap:8px;margin-top:13px}.chat-row.mine{justify-content:flex-end}.chat-row.mine .chat-bubble{border-color:#cce4d7;background:#eaf6f0}.chat-answer{min-width:0;flex:1}.chat-answer-text{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:12px}.chat-composer{display:flex;gap:7px;padding:10px 12px;border-top:1px solid var(--line);background:#fff}.chat-composer input{flex:1;min-width:0;border:1px solid var(--line2);border-radius:8px;padding:8px 10px}.chat-composer button{white-space:nowrap}.chat-hint{padding:0 12px 8px;background:#fff;color:var(--ink3);font-size:10px}.ask-clarify{margin:8px 0}.ask-clarify strong{flex-basis:100%}.ask-result-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.ask-result-grid[hidden]{display:none}.source-card{padding:10px}.source-fields{gap:5px}.field-add{padding:5px 6px}.cart-box{background:#fff}.cart-empty{padding:7px 0}.prompt-output{margin-top:10px}.prompt-output pre{max-height:180px}.catalog-drawer{margin-top:0}.catalog-intro{max-width:1050px;margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:#fff}.catalog-intro h2{margin:0 0 3px;font-size:17px}.catalog-intro p{margin:0;color:var(--ink2)}.toast{bottom:80px;z-index:70}
+    .ask-examples{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0 33px}.ask-examples button{border:1px solid #c8d8d0;border-radius:999px;background:#fff;color:var(--accent2);padding:4px 9px;font-size:11px}.time-box{margin:9px 0;padding:10px;border:1px solid #b7d5c8;border-radius:9px;background:#f4fbf7}.time-box[hidden],.time-row[hidden]{display:none}.time-title{display:flex;align-items:center;gap:7px;margin-bottom:7px}.time-title b{font-size:12px}.time-title span{color:var(--ink3);font-size:10px}.time-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:6px 0}.time-row strong{width:100%;color:var(--accent2);font-size:11px}.time-row label{display:flex;align-items:center;gap:5px;color:var(--ink2);font-size:11px}.time-row input{min-width:0;height:30px;border:1px solid var(--line2);border-radius:6px;background:#fff;padding:0 6px;color:var(--ink)}.time-row input[type=date]{width:148px}.time-row input[type=text]{width:100%}.time-row small{color:var(--ink3);font-size:10px}.time-error{margin:4px 0 0;color:#aa3824;font-size:11px}.time-error:empty{display:none}
+    @media(max-width:820px){.layout{grid-template-columns:1fr}.tree{display:none}.detail{padding:18px}.kpis{grid-template-columns:1fr 1fr}.use-body{grid-template-columns:1fr}.top .sub,.stat{display:none}.lineage-grid{grid-template-columns:1fr}.lineage-arrow{transform:rotate(90deg)}.trace-steps{grid-template-columns:1fr}.trace-steps li:not(:last-child)::after{content:'↓';right:50%;top:auto;bottom:-12px}.trace-case-hint{display:none}.ask-workbench{right:10px;bottom:72px;width:calc(100vw - 20px);height:min(700px,calc(100vh - 85px))}.ask-fab{right:12px;bottom:12px}}
+  </style>
+</head>
+<body>
+  <header class="top"><h1>数据目录工作台 · 数仓前台</h1><span class="sub">一层层看见数据</span><span class="grow"></span><span class="stat"><b>12</b> 张演示表 · <b>64</b> 个演示字段</span><a class="pill-btn" href="index.html#catalog">← 返回作品集</a></header>
+  <div class="layout">
+    <aside class="tree">
+      <div class="layer"><i class="dot ods"></i>ODS 原始层 <small>3 张</small></div><div class="table-link"><span>商品接口原表</span><span>1,280</span></div>
+      <div class="layer"><i class="dot std"></i>STD 标准层 <small>2 张</small></div><div class="table-link"><span>商品标准表</span><span>1,280</span></div>
+      <div class="layer"><i class="dot dwd"></i>DWD 明细层 <small>3 张</small></div><div class="table-link active"><span>商品主数据（身份）</span><span>1,024</span></div><div class="table-link"><span>商品 SKU 明细</span><span>3,860</span></div>
+      <div class="layer"><i class="dot dim"></i>DIM 维度层 <small>1 张</small></div><div class="table-link"><span>平台类目底座</span><span>180</span></div>
+      <div class="layer"><i class="dot dws"></i>DWS 汇总层 <small>2 张</small></div><div class="table-link"><span>商品款级销售汇总</span><span>960</span></div>
+      <div class="layer"><i class="dot ads"></i>ADS 应用层 <small>1 张</small></div><div class="table-link"><span>款产销存全景</span><span>920</span></div>
+    </aside>
+    <section class="main">
+      <div class="detail">
+        <div class="demo-note"><b>公开离线 Demo：</b>表名、行数与样例值均为虚构。右下角问数使用预置匹配，不是真实 AI；页面只演示字段选择、时间筛选和命令生成，不连接任何真实系统，也不读取凭据。</div>
+        <div class="catalog-intro"><h2>按目录查看数据</h2><p>从左侧找表和字段；想直接说需求，点击右下角“AI 问数”。</p></div>
+        <details class="catalog-drawer"><summary>自己浏览表和字段（原有目录方式）</summary>
+        <div class="head"><span class="layer-chip">DWD</span><div><h2>商品主数据（身份）</h2><div class="raw">catalog_product_master</div></div><span class="grow2"></span><span class="status">演示可用</span></div>
+        <p class="desc">一款商品的统一身份和参考属性。需要给业务系统稳定取数时，优先使用受控的标准商品 API。</p>
+        <div class="kpis"><div class="kpi"><span>演示行数</span><b>1,024</b></div><div class="kpi"><span>字段数</span><b>7</b></div><div class="kpi"><span>来源</span><b>API 接入 + 文件投递</b></div><div class="kpi"><span>演示更新时间</span><b>2026-09-24 09:30</b></div></div>
+        <div class="lineage">
+          <div class="lineage-title">这张表：从哪来 → 到哪去</div>
+          <div class="lineage-grid">
+            <div class="lineage-stage"><h3>来源</h3>
+              <div class="lineage-source"><b>商品业务接口</b><em class="route-kind">API</em></div>
+              <div class="lineage-source"><b>商品属性文件</b><em class="route-kind csv">文件投递</em></div>
+            </div>
+            <div class="lineage-arrow" aria-hidden="true">→</div>
+            <div class="lineage-stage self"><h3>当前表</h3><strong>商品主数据</strong><code>catalog_product_master</code><small>接口数据与属性文件标准化合并</small></div>
+            <div class="lineage-arrow" aria-hidden="true">→</div>
+            <div class="lineage-stage"><h3>使用</h3><strong>商品标准 API</strong><code>/api/v1/products</code><small>经营分析应用</small></div>
+          </div>
+          <div class="lineage-note">当前展示的两条上游不是 RPA 投递；RPA 示例见下方。</div>
+          <div class="trace-first">
+            <h3>继续追踪<span>点击展开</span></h3>
+            <details class="trace-case">
+              <summary><span class="trace-case-title">业务类目：字段从哪来？</span><span class="trace-case-hint">字段级 · API</span></summary>
+              <div class="trace-body">
+                <ol class="trace-steps">
+                  <li><b>商品业务 API</b></li>
+                  <li><b>原始字段</b><code>source_product_api.category</code></li>
+                  <li><b>标准字段</b><code>standard_product.business_category</code></li>
+                  <li><b>本表字段</b><code>catalog_product_master.category_reference</code></li>
+                  <li><b>对外字段</b><code>category_level_1</code></li>
+                </ol>
+                <div class="trace-meta"><span class="trace-tag">代码映射已核对</span><span class="trace-tag wait">当日取值未核验</span></div>
+                <details class="trace-proof"><summary>规则与依据</summary><p>业务类目经维度与合同层放出；同款缺值或不唯一时返回空值。公开 Demo 只展示规则结构，不包含内部源码或文档链接。</p></details>
+              </div>
+            </details>
+            <details class="trace-case">
+              <summary><span class="trace-case-title">电商商品级日数据：文件怎么进仓？</span><span class="trace-case-hint">表级 · 文件投递</span></summary>
+              <div class="trace-body">
+                <ol class="trace-steps">
+                  <li><b>电商原始 Excel</b></li>
+                  <li><b>RPA 投递箱</b><code>marketing_daily_inbox</code></li>
+                  <li><b>接入任务</b><code>raw_only</code></li>
+                  <li><b>日表入仓</b><code>白名单校验</code></li>
+                  <li><b>原始明细表</b><code>commerce_product_daily_raw</code></li>
+                </ol>
+                <div class="trace-meta"><span class="trace-tag">文件映射已核对</span><span class="trace-tag wait">此表当日数据待核验</span></div>
+                <details class="trace-proof"><summary>状态与依据</summary><p>“已到”只代表投递任务状态；文件保存、批次入仓、单表质量仍须分别核验。公开 Demo 仅展示核验思路，不对应真实生产批次。</p></details>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <nav class="tabs"><button class="tab active" data-tab="fields">字段（7）</button><button class="tab" data-tab="sample">目录快照样例（前 1 行）</button></nav>
+        <div class="panel active" id="panel-fields">
+          <div class="small-change"><b>选字段</b><span>先看中文业务名；接口字段名放在中文名下面，复制时自动对应。</span><span class="grow"></span><b>已选 <span id="count">4</span> 项</b><button class="primary" id="toggleUse">生成调用示例</button></div>
+          <table class="field-table"><thead><tr><th>选择</th><th>#</th><th>业务字段 / 接口字段</th><th>类型</th><th>含义</th></tr></thead><tbody id="fieldRows"></tbody></table>
+          <section class="use-box" id="useBox">
+            <div class="use-head"><h3>这些字段怎么调用</h3><span>沿用现有只读口令和审计机制</span></div>
+            <div class="use-body">
+              <div>
+                <div class="form-row"><label>取数入口</label><select id="mode"><option value="standard">商品标准 API（业务系统）</option><option value="raw">数仓只读接口（AI / 高级用户）</option></select></div>
+                <div class="form-row"><label>筛选字段</label><select aria-label="筛选字段"><option>款号（接口字段：style_no）</option></select></div>
+                <div class="form-row"><label>筛选值</label><input id="filterValue" value="DEMO-1001"></div>
+                <div class="form-row"><label>已选字段</label><div class="selected-fields" id="selectedFields"></div></div>
+                <p class="mapping-note">业务人员按中文选择；生成接口请求时才转换成对应字段名。</p>
+              </div>
+              <div class="code-card"><div class="label"><span id="codeTitle">HTTP GET 调用示例</span><span id="modeLabel">标准 API</span></div><div class="code-switch"><button class="active" data-code-view="http">接口示例</button><button data-code-view="ai">AI 取数口令</button></div><pre id="code"></pre><button class="copy" id="copy">复制调用示例</button><div class="warning" id="codeWarning">真实令牌使用 &lt;只读口令&gt; 占位，不显示、不保存真实凭据。</div></div>
+            </div>
+          </section>
+        </div>
+        <div class="panel" id="panel-sample"><p class="sample-note"><b>以下是合成样例，不等于实时正式数据。</b> 页面不会连接真实数据库。</p><div class="sample-wrap"><table class="sample"><thead><tr><th>款号<span class="mini">style_no</span></th><th>商品年份<span class="mini">year</span></th><th>业务类目<span class="mini">category_level_1</span></th><th>调拨在途库存<span class="mini">transfer_in_transit</span></th></tr></thead><tbody><tr><td>DEMO-1001</td><td>2026</td><td>示例品类</td><td>36</td></tr></tbody></table></div></div>
+        </details>
+      </div>
+    </section>
+  </div>
+  <section class="ask-workbench" id="askWorkbench" aria-label="AI 问数聊天框" role="dialog" aria-modal="false" hidden>
+    <header class="chat-head"><span class="chat-avatar" aria-hidden="true">数</span><div><h2>AI 问数</h2><p>先说需求，再选字段</p></div><span class="demo-badge">预置演示 · 模型待接入</span><span class="chat-cart-count" id="chatCartHeader">购物车 0</span><button type="button" class="chat-close" id="chatClose" aria-label="关闭聊天框">×</button></header>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-welcome"><span class="chat-avatar" aria-hidden="true">数</span><div class="chat-bubble">说出需求，选字段，再圈定时间。取数命令只读取你选的字段和日期。</div></div>
+      <div class="ask-examples"><button type="button" data-example="daily">试试：8 月 3–17 日电商销量</button><button type="button" data-example="monthly">试试：8 月同比与环比</button></div>
+      <div class="ask-response" id="askResponse" hidden>
+        <div class="chat-row mine"><div class="chat-bubble" id="questionText"></div></div>
+        <div class="chat-row"><span class="chat-avatar" aria-hidden="true">数</span><div class="chat-answer"><div class="chat-answer-text" id="answerText" aria-live="polite"></div>
+          <div class="ask-clarify" id="clarifyOptions" hidden><strong>你想看哪种口径？</strong><button type="button" class="scope-choice" data-scope="daily">按款 · 每日</button><button type="button" class="scope-choice" data-scope="monthly">按店铺 · 每月</button><button type="button" class="scope-choice" data-scope="all">先看两种</button></div>
+          <div class="time-box" id="timeBox" hidden><div class="time-title"><b>取数时间</b><span>先定时间，再生成命令</span></div><div class="time-row" id="dailyTime"><strong>日数据 · 从某天到某天</strong><label>开始 <input type="date" id="dateFrom" value="2026-08-03"></label><label>结束 <input type="date" id="dateTo" value="2026-08-17"></label></div><div class="time-row" id="monthlyTime"><strong>月数据 · 只取要比较的月份</strong><input type="text" id="monthPeriods" value="2025-08,2026-07,2026-08" aria-label="指定月份，逗号分隔" placeholder="如：2025-08,2026-07,2026-08"><small>去年同月、上月、本月；用逗号分隔，最多 12 个月</small></div><p class="time-error" id="timeError" role="alert"></p></div>
+          <div class="ask-result-grid" id="askResultGrid" hidden><div id="sourceResults" aria-live="polite"></div><aside class="cart-box" aria-label="本次字段购物车"><div class="cart-head"><h3>本次字段购物车</h3><span id="cartCount">0 项</span></div><div id="cartItems" aria-live="polite"></div><p class="cart-warning" id="cartWarning"></p><div class="cart-actions"><button type="button" class="primary" id="generatePrompt" disabled>生成给 AI 的取数命令</button></div></aside></div>
+          <div class="prompt-output" id="promptOutput" hidden><div class="prompt-head"><h3>复制给自己的 AI</h3><span class="grow"></span><button type="button" class="secondary" id="copyPrompt">复制命令</button></div><pre id="promptText"></pre><p class="prompt-note">这里只生成任务话术，不含真实令牌；实际取数须由有权限的 AI 环境完成。</p></div>
+        </div></div>
+      </div>
+    </div>
+    <div class="chat-composer"><input id="askInput" value="我想看电商的销量数据" aria-label="向 AI 问数描述需求" placeholder="例如：我想看电商的销量数据"><button type="button" class="primary" id="askButton">发送</button></div>
+    <div class="chat-hint">演示仅匹配“电商销量”示例；模型与真实数据服务均未接入。</div>
+  </section>
+  <button type="button" class="ask-fab" id="askFab" aria-controls="askWorkbench" aria-expanded="false"><span class="ask-fab-icon" aria-hidden="true">✦</span>AI 问数</button>
+  <div class="toast" id="toast">已复制</div>
+  <script>
+    (function(){
+      var fields=[
+        {key:'style_no',cn:'款号',raw:'款号',type:'TEXT',meaning:'商品款级业务标识',selected:true},
+        {key:'year',cn:'商品年份',raw:'年份',type:'TEXT',meaning:'商品归属年份',selected:true},
+        {key:'category_level_1',cn:'业务类目',raw:'类目参考',type:'TEXT',meaning:'业务类目参考值；无值返回 null',selected:true},
+        {key:'image_url',cn:'模特主图',raw:null,type:'TEXT',meaning:'来自图片资产库；不直接取商品主表中的原始图片地址',selected:false},
+        {key:'transfer_in_transit',cn:'调拨在途库存',raw:null,type:'INTEGER',meaning:'商品列表按款汇总；来源于库存事实',selected:true},
+        {key:'total_sale_qty',cn:'累计销量',raw:null,type:'INTEGER',meaning:'列表及详情按款汇总；SKU 明细另有对应值',selected:false},
+        {key:'cost_price',cn:'SKU 成本',raw:null,type:'NUMERIC',meaning:'详情 SKU 明细字段；来源于标准商品成本',selected:false}
+      ];
+      var codeView='http';
+      function esc(s){return String(s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
+      var askSources=[
+        {id:'daily',title:'电商销量（日更源报）',table:'product_sales_daily',grain:'日期 × 渠道 × 款式编码',tag:'商品 / 渠道日',route:'RPA 文件投递',fields:[
+          {key:'日期',label:'业务日期',hint:'按天',recommended:true},
+          {key:'渠道',label:'店铺 / 渠道',hint:'区分店铺',recommended:true},
+          {key:'款式编码',label:'款号',hint:'按款',recommended:true},
+          {key:'销售数量',label:'销售数量',hint:'源报件数',recommended:true},
+          {key:'销售金额',label:'销售金额',hint:'源报金额',recommended:true},
+          {key:'实发',label:'实发数量',hint:'发货量',recommended:false},
+          {key:'当期退货金额',label:'当期退货金额',hint:'退款参考',recommended:false}
+        ]},
+        {id:'monthly',title:'电商经营（月度源报）',table:'channel_sales_monthly',grain:'年 × 月 × 店铺',tag:'店铺月',route:'月度文件投递',fields:[
+          {key:'年',label:'年份',hint:'按年',recommended:true},
+          {key:'月',label:'月份',hint:'按月',recommended:true},
+          {key:'店铺',label:'店铺',hint:'区分店铺',recommended:true},
+          {key:'支付件数',label:'支付件数',hint:'月度源报',recommended:true},
+          {key:'支付金额',label:'支付金额',hint:'月度源报',recommended:true},
+          {key:'访客数',label:'访客数',hint:'流量',recommended:false},
+          {key:'成功退款金额',label:'成功退款金额',hint:'退款',recommended:false}
+        ]}
+      ];
+      var askScope='all',askQuestion='',askCart=[];
+      function askField(sourceId,key){var source=askSources.find(function(s){return s.id===sourceId;});return source&&source.fields.find(function(f){return f.key===key;});}
+      function cartHas(sourceId,key){return askCart.some(function(x){return x.sourceId===sourceId&&x.key===key;});}
+      function hidePrompt(){document.getElementById('promptOutput').hidden=true;document.getElementById('promptText').textContent='';}
+      function showAskResults(){document.getElementById('clarifyOptions').hidden=true;document.getElementById('timeBox').hidden=false;document.getElementById('dailyTime').hidden=askScope==='monthly';document.getElementById('monthlyTime').hidden=askScope==='daily';document.getElementById('askResultGrid').hidden=false;document.getElementById('timeError').textContent='';renderAskSources();renderAskCart();}
+      function setExampleTime(kind){
+        var year=new Date().getFullYear(),month='08';
+        if(kind==='daily'){document.getElementById('dateFrom').value=year+'-'+month+'-03';document.getElementById('dateTo').value=year+'-'+month+'-17';}
+        else{document.getElementById('monthPeriods').value=(year-1)+'-'+month+','+year+'-07,'+year+'-'+month;}
+        hidePrompt();
+      }
+      function suggestTimeFromQuestion(question){
+        var days=question.match(/(?:19|20)\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])/g);
+        if(days&&days.length>=2){document.getElementById('dateFrom').value=days[0];document.getElementById('dateTo').value=days[1];}
+        var year=new Date().getFullYear(),monthMatch=question.match(/(?:去年|今年|\d{4}\s*年)\s*(\d{1,2})\s*月/),month=monthMatch?Number(monthMatch[1]):null;
+        if(month&&month>=1&&month<=12&&/去年|今年/.test(question)){
+          var current=year+'-'+String(month).padStart(2,'0'),prior=new Date(Date.UTC(year,month-2,1));
+          var periods=[(year-1)+'-'+String(month).padStart(2,'0')];
+          if(/环比/.test(question))periods.push(prior.getUTCFullYear()+'-'+String(prior.getUTCMonth()+1).padStart(2,'0'));
+          periods.push(current);document.getElementById('monthPeriods').value=periods.join(',');
+        }
+      }
+      function isoDay(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;var date=new Date(value+'T00:00:00Z');return !Number.isNaN(date.getTime())&&date.toISOString().slice(0,10)===value?date:null;}
+      function selectedTime(sourceId){
+        if(sourceId==='daily'){
+          var from=document.getElementById('dateFrom').value,to=document.getElementById('dateTo').value;
+          var first=isoDay(from),last=isoDay(to);
+          if(!first||!last)return {error:'日数据请填写有效的开始和结束日期。'};
+          if(first.getUTCFullYear()<1900||last.getUTCFullYear()>2099)return {error:'日数据年份须在 1900–2099 之间。'};
+          var days=Math.round((last-first)/86400000)+1;
+          if(days<1||days>366)return {error:'日数据时间范围须为 1–366 天，且结束日不能早于开始日。'};
+          return {label:from+' 至 '+to+'（含首尾）',params:[['date_field','日期'],['date_from',from],['date_to',to]]};
+        }
+        var parts=document.getElementById('monthPeriods').value.replace(/，/g,',').split(',').map(function(x){return x.trim();});
+        if(parts.length<1||parts.length>12||parts.some(function(x){return !/^(19|20)\d{2}-(0[1-9]|1[0-2])$/.test(x);})||new Set(parts).size!==parts.length)return {error:'月数据请填写 1–12 个不重复的 YYYY-MM，用逗号分隔。'};
+        return {label:parts.join('、'),params:[['year_field','年'],['month_field','月'],['periods',parts.join(',')]]};
+      }
+      function renderAskSources(){
+        var sources=askSources.filter(function(s){return askScope==='all'||s.id===askScope;});
+        document.getElementById('sourceResults').innerHTML=sources.map(function(s){return '<article class="source-card"><div class="source-top"><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.grain)+' · '+esc(s.route)+'</p></div><span class="grow"></span><span class="source-tag '+(s.id==='monthly'?'alt':'')+'">'+esc(s.tag)+'</span></div><code class="source-tech">'+esc(s.table)+'</code><div class="source-fields">'+s.fields.map(function(f){var selected=cartHas(s.id,f.key);return '<button type="button" class="field-add" data-ask-add="'+esc(s.id)+'" data-field="'+esc(f.key)+'" aria-pressed="'+selected+'" title="演示列名：'+esc(f.key)+'"><b>'+(selected?'✓':'＋')+'</b><span>'+esc(f.label)+'</span><small>'+esc(f.hint)+'</small></button>';}).join('')+'</div><div class="source-footer"><button type="button" class="bundle-button" data-bundle="'+esc(s.id)+'">＋ 加入建议组合</button><small>公开演示字段，实际使用以组织目录为准</small></div></article>';}).join('');
+        document.querySelectorAll('[data-ask-add]').forEach(function(b){b.onclick=function(){var sourceId=b.dataset.askAdd,key=b.dataset.field;if(!cartHas(sourceId,key)&&askField(sourceId,key))askCart.push({sourceId:sourceId,key:key});hidePrompt();renderAskSources();renderAskCart();};});
+        document.querySelectorAll('[data-bundle]').forEach(function(b){b.onclick=function(){var s=askSources.find(function(x){return x.id===b.dataset.bundle;});s.fields.filter(function(f){return f.recommended;}).forEach(function(f){if(!cartHas(s.id,f.key))askCart.push({sourceId:s.id,key:f.key});});hidePrompt();renderAskSources();renderAskCart();};});
+      }
+      function renderAskCart(){
+        var holder=document.getElementById('cartItems');
+        document.getElementById('cartCount').textContent=askCart.length+' 项';
+        document.getElementById('chatCartHeader').textContent='购物车 '+askCart.length;
+        document.getElementById('generatePrompt').disabled=!askCart.length;
+        if(!askCart.length){holder.innerHTML='<div class="cart-empty">点左侧字段的「＋」，先放进这里。</div>';document.getElementById('cartWarning').textContent='';return;}
+        holder.innerHTML=askSources.filter(function(s){return askCart.some(function(x){return x.sourceId===s.id;});}).map(function(s){return '<div class="cart-group"><div class="cart-group-title">'+esc(s.title)+'</div>'+askCart.filter(function(x){return x.sourceId===s.id;}).map(function(x){var f=askField(x.sourceId,x.key);return '<div class="cart-item"><span>'+esc(f.label)+'</span><small>'+esc(f.key)+'</small><button type="button" data-cart-remove="'+esc(x.sourceId)+'" data-field="'+esc(x.key)+'" aria-label="移除'+esc(f.label)+'">×</button></div>';}).join('')+'</div>';}).join('');
+        var selectedSources=askSources.filter(function(s){return askCart.some(function(x){return x.sourceId===s.id;});});
+        document.getElementById('cartWarning').textContent=selectedSources.length>1?'两张表粒度不同：会分别取数，不自动相加或关联。':'';
+        holder.querySelectorAll('[data-cart-remove]').forEach(function(b){b.onclick=function(){askCart=askCart.filter(function(x){return !(x.sourceId===b.dataset.cartRemove&&x.key===b.dataset.field);});hidePrompt();renderAskSources();renderAskCart();};});
+      }
+      var askRequestId=0,awaitingScope=false;
+      function runAsk(){
+        var question=document.getElementById('askInput').value.trim();
+        if(!question){document.getElementById('askInput').focus();return;}
+        document.getElementById('askInput').value='';
+        if(awaitingScope){
+          var replyDaily=/按款|款号|款式|每日|每天|日粒度/.test(question);
+          var replyMonthly=/按店铺|每月|月度|月粒度|同比|环比/.test(question);
+          var replyBoth=/两种|都看|全部/.test(question);
+          if(replyBoth||replyDaily!==replyMonthly){
+            askScope=replyBoth?'all':(replyDaily?'daily':'monthly');awaitingScope=false;
+            document.getElementById('questionText').textContent=askQuestion+'；补充：'+question;
+            document.getElementById('answerText').textContent=askScope==='all'?'我把两种来源分别列出；它们不能直接相加。':'收到，按“'+(askScope==='daily'?'按款 · 每日':'按店铺 · 每月')+'”展示候选字段。';
+            showAskResults();return;
+          }
+          if(!/电商/.test(question)){
+            document.getElementById('questionText').textContent=askQuestion+'；补充：'+question;
+            document.getElementById('answerText').textContent='还需要确认是“按款每日”还是“按店铺每月”。你也可以直接点下面的选项。';
+            return;
+          }
+        }
+        askRequestId++;
+        var currentRequest=askRequestId;
+        askCart=[];askScope='all';askQuestion=question;awaitingScope=false;
+        suggestTimeFromQuestion(question);
+        document.querySelectorAll('[data-scope]').forEach(function(x){x.classList.remove('active');});
+        document.getElementById('chatCartHeader').textContent='购物车 0';
+        hidePrompt();
+        document.getElementById('askResponse').hidden=false;
+        document.getElementById('questionText').textContent=question;
+        document.getElementById('answerText').textContent='正在对照预置的表和字段…';
+        document.getElementById('clarifyOptions').hidden=true;
+        document.getElementById('timeBox').hidden=true;
+        document.getElementById('askResultGrid').hidden=true;
+        setTimeout(function(){
+          if(currentRequest!==askRequestId)return;
+          var matched=/电商/.test(question)&&/销量|销售|支付|成交|数量|金额/.test(question);
+          if(!matched){document.getElementById('answerText').textContent='这个离线 Demo 目前只预置“电商销量”示例。真实模型与元数据服务均未接入，不能假装已找到其他字段。';return;}
+          var dailyHint=/按款|款号|款式|每日|每天|日销量|\d{1,2}\s*[–—-]\s*\d{1,2}\s*日/.test(question);
+          var monthlyHint=/月度|每月|按店铺.*月|店铺月|同比|环比/.test(question);
+          if(dailyHint!==monthlyHint){
+            askScope=dailyHint?'daily':'monthly';
+            document.getElementById('answerText').textContent='我按“'+(dailyHint?'按款 · 每日':'按店铺 · 每月')+'”展示候选字段。选字段后，请确认取数时间。';
+            showAskResults();
+          }else{
+            document.getElementById('answerText').textContent='“电商销量”可能指按款每日的来源报表，也可能指按店铺每月的支付数据。你想看哪一种？';
+            awaitingScope=true;
+            document.getElementById('clarifyOptions').hidden=false;
+          }
+        },360);
+      }
+      function makeAskPrompt(){
+        var selectedSources=askSources.filter(function(s){return askCart.some(function(x){return x.sourceId===s.id;});});
+        var scopeText=selectedSources.length>1?'同时选择日源报与店铺月报；请分别分析，不能直接合并':selectedSources[0].grain;
+        var lines=['你是我的数据助理。请只读查询真实数仓，不要修改数据，也不要用网页首页或目录样例冒充真实结果。','','业务问题：'+askQuestion,'本次所选数据粒度：'+scopeText,'以下由我确认的取数时间优先；若与自然语言问题冲突，请先问我，不要默默扩大范围。',''];
+        lines.push('这是公开演示命令。实际使用前，请将 https://readonly.example.invalid 替换为组织批准的只读接口地址。先请求 GET https://readonly.example.invalid/api/health，再请求 GET https://readonly.example.invalid/api/catalog，确认表与列真实存在、当前可访问、最新业务日期和字段含义。请求头使用 X-Readonly-Token: <由我在安全环境提供的只读口令>；不要把口令拼进网址，也不要在回答里回显。');
+        selectedSources.forEach(function(s){
+          var selected=askCart.filter(function(x){return x.sourceId===s.id;});
+          var keys=selected.map(function(x){return x.key;});
+          keys=(s.id==='daily'?['日期']:['年','月']).concat(keys.filter(function(key){return (s.id==='daily'?['日期']:['年','月']).indexOf(key)<0;}));
+          var time=selectedTime(s.id);
+          var params=[['name',s.table],['fields',keys.join(',')]].concat(time.params,[['limit','5000'],['offset','0']]);
+          var url='https://readonly.example.invalid/api/data/table?'+params.map(function(p){return encodeURIComponent(p[0])+'='+encodeURIComponent(p[1]);}).join('&');
+          lines.push('','数据表：'+s.table,'粒度：'+s.grain,'取数时间：'+time.label,'需要字段：'+selected.map(function(x){var f=askField(x.sourceId,x.key);return f.label+'（实际列名：'+f.key+'）';}).join('、'),'时间键 '+(s.id==='daily'?'日期':'年、月')+' 随请求一并返回，供核对和分组。','只读请求：GET '+url);
+        });
+        lines.push('','只使用以上已筛选请求，不要退回无时间参数的整表取数。若 has_more=true，保持 name、fields 和全部时间参数不变，仅用 next_offset 翻页，直到 has_more=false；只接受 source=live_db。若选中的指标无法支持同比/环比，或比较期不完整，先说明缺口，不要补造数据。');
+        lines.push('口径提醒：电商日销量表是来源报表，不等于订单实付或财务收入；电商月度经营表是店铺月粒度。两表若同时选中，请分别报告，未经可核验的映射和粒度对齐不要直接拼接或相加。字段、表或权限不匹配、无法发送带请求头的 HTTP 请求时，请说明缺口并停止猜测。');
+        return lines.join('\n');
+      }
+      function flashToast(message){var t=document.getElementById('toast');t.textContent=message;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},1800);}
+      function copyAskPrompt(){var value=document.getElementById('promptText').textContent;if(!value)return;function fallback(){var area=document.createElement('textarea');area.value=value;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}area.remove();flashToast(ok?'已复制取数命令':'复制失败，请手动选择文本');}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(function(){flashToast('已复制取数命令');}).catch(fallback);}else fallback();}
+      function setChatOpen(open){document.getElementById('askWorkbench').hidden=!open;document.getElementById('askFab').setAttribute('aria-expanded',String(open));if(open)document.getElementById('askInput').focus();else document.getElementById('askFab').focus();}
+      document.getElementById('askFab').onclick=function(){setChatOpen(document.getElementById('askWorkbench').hidden);};
+      document.getElementById('chatClose').onclick=function(){setChatOpen(false);};
+      document.getElementById('askButton').onclick=runAsk;
+      document.getElementById('askInput').onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();runAsk();}else if(e.key==='Escape'){setChatOpen(false);}};
+      document.querySelectorAll('[data-example]').forEach(function(b){b.onclick=function(){var kind=b.dataset.example,year=new Date().getFullYear();setExampleTime(kind);document.getElementById('askInput').value=kind==='daily'?'看电商 '+year+' 年 8 月 3–17 日按款销量':'看电商去年 8 月和今年 8 月的销量同比、环比';runAsk();setChatOpen(true);};});
+      document.querySelectorAll('[data-scope]').forEach(function(b){b.onclick=function(){askScope=b.dataset.scope;awaitingScope=false;document.querySelectorAll('[data-scope]').forEach(function(x){x.classList.toggle('active',x===b);});document.getElementById('answerText').textContent=askScope==='all'?'先把两种来源分别列出来；它们的粒度不同，不能直接相加。':'已按“'+(askScope==='daily'?'按款 · 每日':'按店铺 · 每月')+'”展示候选字段。';hidePrompt();showAskResults();};});
+      ['dateFrom','dateTo','monthPeriods'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){hidePrompt();document.getElementById('timeError').textContent='';});});
+      document.getElementById('generatePrompt').onclick=function(){
+        if(!askCart.length)return;
+        var selected=askSources.filter(function(s){return askCart.some(function(x){return x.sourceId===s.id;});});
+        var bad=selected.map(function(s){return selectedTime(s.id);}).find(function(t){return t.error;});
+        if(bad){hidePrompt();document.getElementById('timeError').textContent=bad.error;document.getElementById('timeBox').scrollIntoView({behavior:'smooth',block:'nearest'});return;}
+        document.getElementById('timeError').textContent='';document.getElementById('promptText').textContent=makeAskPrompt();document.getElementById('promptOutput').hidden=false;document.getElementById('chatBody').scrollTop=document.getElementById('chatBody').scrollHeight;
+      };
+      document.getElementById('copyPrompt').onclick=copyAskPrompt;
+      function chosen(){return fields.filter(function(f){return f.selected;});}
+      function fieldLabels(){return chosen().map(function(f){return f.cn+'（'+f.key+'）';}).join('、');}
+      function requestText(){
+        var value=document.getElementById('filterValue').value.trim();
+        if(!value)return '请先填写款号。';
+        if(!chosen().length)return '请先选择至少一个字段。';
+        if(document.getElementById('mode').value==='standard')return 'GET https://readonly.example.invalid/api/v1/products/'+encodeURIComponent(value)+'\n\n需要查看：'+fieldLabels()+'。\n商品列表和详情 summary 使用对应字段；SKU 成本在详情 sku_rows[]。\n这是公开演示地址；实际使用时请替换为组织批准的正式地址和认证方式。';
+        var unsupported=chosen().filter(function(f){return !f.raw;});
+        if(unsupported.length)return '这张商品主数据表不能一次提供全部所选字段：'+unsupported.map(function(f){return f.cn;}).join('、')+'。\n\n请取消这些字段后生成单表请求，或使用“AI 取数口令”让 AI 先查目录、再分别读取对应表。';
+        var cols=chosen().map(function(f){return f.raw;}).join(',');
+        return 'GET https://readonly.example.invalid/api/data/table?name='+encodeURIComponent('catalog_product_master')+'&fields='+encodeURIComponent(cols)+'&limit=5000&offset=0\nX-Readonly-Token: <只读口令>\n\n这是公开演示地址。实际使用时先替换为组织批准的只读接口，再按返回的 has_more / next_offset 读取后续页，并按“款号 = '+value+'”精确筛选。';
+      }
+      function aiPrompt(){
+        var value=document.getElementById('filterValue').value.trim();
+        return '你是我的数据助理。请从组织批准的真实只读接口取数，不要修改数据，也不要打开网页首页代替取数。\n\n公开演示地址：https://readonly.example.invalid\n请先把它替换为组织批准的真实接口地址。\n请求头：X-Readonly-Token: <只读口令>\n不要把口令拼进网址。\n\n先请求 GET /api/health 验证连通，再请求 GET /api/catalog 核对目录。\n\n本次需求：查询款号 '+(value||'<请填写款号>')+' 的'+(chosen().length?fieldLabels():'<请先选择字段>')+'。请优先按中文业务名理解需求，用括号中的接口字段名辅助核对，不要假定它们都存于同一张商品主表。\n\n找到真实存在的表和列后，用 GET /api/data/table?name=表名&fields=实际列名&limit=5000&offset=0 读取；返回 has_more=true 时按 next_offset 继续翻页，再按款号精确筛选。多表字段请分别核对来源、粒度和可关联的款号；无法可靠关联就说明缺口。\n\n只接受真实接口返回。接口失败、字段不存在、没有权限或无法发送带请求头的请求时请如实说明，不要猜测或编造。';
+      }
+      function render(){
+        document.getElementById('fieldRows').innerHTML=fields.map(function(f,i){return '<tr class="'+(f.selected?'selected':'')+'"><td><input class="check pick" type="checkbox" data-key="'+esc(f.key)+'" aria-label="选择'+esc(f.cn)+'" '+(f.selected?'checked':'')+'></td><td>'+(i+1)+'</td><td><span class="field-name">'+esc(f.cn)+'</span><span class="field-tech">'+esc(f.key)+'</span></td><td>'+esc(f.type)+'</td><td class="meaning">'+esc(f.meaning)+'</td></tr>';}).join('');
+        var names=chosen();document.getElementById('count').textContent=names.length;document.getElementById('selectedFields').textContent=names.length?fieldLabels():'请至少选择一个字段';
+        document.getElementById('modeLabel').textContent=document.getElementById('mode').value==='standard'?'商品合同 API':'数仓只读接口';
+        document.getElementById('codeTitle').textContent=codeView==='ai'?'发给 AI 的完整取数话术':'HTTP GET 调用示例';
+        document.getElementById('code').textContent=codeView==='ai'?aiPrompt():requestText();
+        document.getElementById('copy').textContent=codeView==='ai'?'复制 AI 取数口令':'复制调用示例';
+        document.getElementById('codeWarning').textContent=codeView==='ai'?'这里的“AI 取数口令”是任务话术；真实只读令牌仍单独安全保管。':(document.getElementById('mode').value==='standard'?'商品合同 API 的地址与认证方式需从正式接口文档确认。':'真实只读令牌用 <只读口令> 占位，不显示、不保存凭据。');
+        document.querySelectorAll('.pick').forEach(function(x){x.onchange=function(){fields.find(function(f){return f.key===x.dataset.key;}).selected=x.checked;render();};});
+      }
+      document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('active',x===b);});document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.id==='panel-'+b.dataset.tab);});};});
+      document.getElementById('toggleUse').onclick=function(){var box=document.getElementById('useBox');box.classList.toggle('open');this.textContent=box.classList.contains('open')?'收起调用示例':'生成调用示例';if(box.classList.contains('open'))box.scrollIntoView({behavior:'smooth',block:'nearest'});};
+      document.getElementById('mode').onchange=render;document.getElementById('filterValue').oninput=render;
+      document.querySelectorAll('[data-code-view]').forEach(function(btn){btn.onclick=function(){codeView=btn.dataset.codeView;document.querySelectorAll('[data-code-view]').forEach(function(x){x.classList.toggle('active',x===btn);});render();};});
+      document.getElementById('copy').onclick=function(){var text=document.getElementById('code').textContent;var t=document.getElementById('toast');function ok(){t.classList.add('show');setTimeout(function(){t.classList.remove('show');},1600);}if(navigator.clipboard){navigator.clipboard.writeText(text).then(ok).catch(ok);}else{ok();}};
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # PMPortfolio_star
 
-Star 的数据产品经理作品集，包含三个案例：数据接入与流通工作台、数仓前台、天气数据产品。首页提供三个可操作的合成数据 Demo：批次接入检查、AI 字段购物车与时间受控取数、天气偏差判断。
+Star 的数据产品经理作品集，包含三个案例：数据接入与流通工作台、数仓前台、天气数据产品。首页提供三个可操作的合成数据 Demo；其中数仓前台另提供独立完整体验页，保留数据目录、字段血缘、悬浮 AI 问数、字段购物车、时间筛选与命令生成闭环。
 
-在线浏览：[GitHub Pages 作品集](https://yxsun0810.github.io/PMPortfolio_star/)；也可直接打开 `index.html` 本地预览。页面使用仓库内的 `styles.css`，不依赖第三方网络字体、脚本或图片。
+在线浏览：[GitHub Pages 作品集](https://yxsun0810.github.io/PMPortfolio_star/)；数仓前台完整体验页为 [`catalog-demo.html`](https://yxsun0810.github.io/PMPortfolio_star/catalog-demo.html)。也可直接打开 `index.html` 或 `catalog-demo.html` 本地预览。页面不依赖第三方网络字体、脚本或图片。
 
 ## 内容口径
 

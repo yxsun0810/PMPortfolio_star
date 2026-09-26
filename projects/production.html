@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="生产分析台案例：把生产事实、异常证据、排期压力与人工跟进组织成可复核的工作闭环。">
+  <title>生产分析台 · Star 作品集</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳转到正文</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html#top" aria-label="返回 Star 作品集首页"><span class="brand-mark">S<span class="brand-dot">.</span></span><span class="brand-copy"><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="../index.html#top">首页</a><a href="../index.html#overview">精选项目</a><a href="#case-content" aria-current="page">当前案例</a></nav>
+    <div class="header-actions"><button class="theme-toggle" type="button" aria-label="切换夜间模式" aria-pressed="false"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">夜间</span></button><a class="header-cta" href="../index.html#overview">全部项目 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="detail-shell" id="content">
+    <div class="breadcrumb"><a href="../index.html#overview">精选项目</a><span aria-hidden="true">/</span><span>生产分析台</span></div>
+    <section class="detail-hero production" aria-labelledby="project-title">
+      <div><div class="kicker">CASE 04 / PRODUCTION SIGNALS</div><h1 id="project-title">让生产异常被发现，也被持续跟进</h1><p>生产数据散落在订单、采购、排期和到货环节。工作台把事实、风险与人工处理放在同一条可复核的路径上。</p><div class="detail-hero-actions"><a class="button button-primary" href="../production-demo.html" target="_blank" rel="noopener">体验生产分析 Demo <span aria-hidden="true">↗</span></a><a class="button button-secondary button-light" href="#case-content">阅读项目详情 <span aria-hidden="true">↓</span></a></div></div>
+      <div class="detail-hero-visual" aria-hidden="true"><span>生产事实</span><i>→</i><span>异常证据</span><i>→</i><span>人工跟进</span><i>→</i><span>再次复核</span></div>
+    </section>
+    <section class="detail-facts" aria-label="项目概况"><div><span>业务场景</span><strong>生产与供应链进度、异常和采购协同</strong></div><div><span>我的参与</span><strong>需求与口径梳理、交互建设、验证及持续维护</strong></div><div><span>关键问题</span><strong>如何从分散事实走到可信的处理闭环</strong></div></section>
+    <article class="detail-content" id="case-content">
+      <section><span class="detail-index">01 / PROBLEM</span><h2>问题如何定义</h2><p>生产管理不只需要知道“订单到了哪一步”。计划已过但实际未记录、来货日期缺失、采购入库欠数或某日排期超载，都需要有人核对事实、确认责任并持续跟踪。若只有一个红色预警，没有触发证据与后续状态，就很难形成可执行的工作。</p></section>
+      <section><span class="detail-index">02 / DECISIONS</span><h2>方案与关键取舍</h2><ul><li>统一工作台入口，按生产进度、异常驾驶舱、排期压力、采购入库、款式与供应商档案等任务组织信息。</li><li>异常展示触发条件、关键证据、负责人和解除条件；同一订单的不同异常分别处理，不因一条已处理就自动结束整单。</li><li>将“记录处理”“到期再提醒”“源条件解除后关闭”分成不同状态，避免把人工回复误当作生产问题已解决。</li><li>排期只先给候选调整方向；正式计划变更需要独立预检、人工确认和审计，不让分析页自动改动源计划。</li><li>采购与入库按单据、物料、规格、单位等关联；单位不一致时显示待换算，不为了凑齐率而猜测。</li></ul></section>
+      <section class="detail-judgment"><span class="detail-index">03 / PRODUCT JUDGMENT</span><h2>核心产品判断</h2><p>分析台的价值不是把多张表堆在一起，而是让业务人员看到“发生了什么、为什么值得处理、下一步由谁确认、后来是否真的解除”。因此，事实读取与人工动作必须分开，规则结果要能追溯，失败时也不能把旧问题误判为消失。</p></section>
+      <section><span class="detail-index">04 / OUTCOME</span><h2>形成的能力与验证</h2><p>项目资料与正式版本记录显示，生产进度、异常、排期、采购入库及档案模块已进入统一工作台；异常处理保留跟进状态与处理轨迹，正式数据和可写运行记录分区管理。这里呈现产品机制与本人参与的建设工作，不把自动化测试或页面上线等同于每一项业务结果都已由负责人验收，也不宣称未经核实的效率或收益数字。</p></section>
+    </article>
+    <section class="case-preview" aria-labelledby="preview-title"><div class="preview-heading"><div><span class="detail-index">SCENARIO PREVIEW / 合成演示</span><h2 id="preview-title">一条异常如何走到复核？</h2><p>在公开演示页选中合成订单，查看触发证据，记录跟进日期，再模拟到期与源条件解除。</p></div><span class="preview-label">浏览器内模拟</span></div><div class="demo-layout"><div class="demo-input"><strong>演示起点</strong><p>裁剪计划已过，实际裁剪记录仍为空。业务人员需要先核对证据，而不是直接改生产计划。</p><a class="button button-primary" href="../production-demo.html" target="_blank" rel="noopener">打开可操作工作台 ↗</a></div><div class="demo-result"><strong>演示可观察的变化</strong><ol class="stage-list"><li class="done">1 发现异常并查看依据</li><li class="done">2 人工记录处理说明与跟踪日期</li><li class="done">3 到期后源条件未解除则再次提醒</li><li class="done">4 源事实补齐后复核关闭</li></ol></div></div><p class="preview-foot">订单、姓名、日期和数量均为合成案例。演示不发送通知、不回写任何正式业务系统。</p></section>
+    <nav class="detail-next" aria-label="项目导航"><a href="weather.html">← 上一项目：天气数据产品</a><a href="../index.html#overview">返回全部项目 →</a></nav>
+    <footer>© 2026 Star · PMPortfolio_star</footer>
+  </main>
+  <script src="../site.js" defer></script>
+</body>
+</html>

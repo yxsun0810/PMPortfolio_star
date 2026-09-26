@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="天气数仓公开交互演示：像购物一样选择城市、日期与气象指标，再查看合成结果和只读取数需求。">
+  <meta name="theme-color" content="#0d263a">
+  <title>天气数仓 · 问数购物车 Demo</title>
+  <link rel="stylesheet" href="weather-demo.css">
+  <script src="weather-demo-core.js" defer></script>
+  <script src="weather-demo-ui.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#demo-main">跳转到演示</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#overview"><span class="brand-mark">S</span><span><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
+    <div class="header-right"><span class="demo-status"><i></i> 公开交互演示 · 合成数据</span><a class="back-link" href="index.html#overview">返回作品集 ↗</a></div>
+  </header>
+
+  <main id="demo-main" class="shell">
+    <section class="intro">
+      <div class="intro-copy">
+        <span class="eyebrow">WEATHER DATA / INTERACTIVE DEMO</span>
+        <h1>问天气，<em>像购物一样选数据。</em></h1>
+        <p>不必先认识天气表。说出问题，挑选城市、日期和指标；购物车帮你核对范围，结果只展示这次需要的内容。</p>
+        <div class="intro-actions"><button class="primary-button" id="open-ai-top" type="button">✦ AI 问天气</button><a href="#builder" class="secondary-button">直接选数据 ↓</a></div>
+      </div>
+      <div class="intro-art" aria-hidden="true"><span class="art-sun"></span><div class="art-cloud cloud-one"></div><div class="art-cloud cloud-two"></div><div class="art-card"><small>城市 × 日期 × 指标</small><strong>一份刚刚好的天气数据</strong><span>历史实况　/　常年基线　/　预报快照</span></div><svg viewBox="0 0 520 170" preserveAspectRatio="none"><path d="M0 125 C70 110 80 50 155 70 S260 150 330 83 S430 48 520 18" fill="none" stroke="#9ddfda" stroke-width="4" stroke-linecap="round"/></svg></div>
+    </section>
+
+    <div class="boundary"><strong>演示边界</strong><span>本页所有数值由浏览器生成，是合成样例；不查询真实天气库、不调用 AI 模型，也不复用数仓前台的取数口令。</span></div>
+
+    <section class="workspace" id="builder" aria-labelledby="builder-title">
+      <div class="section-title"><div><span class="section-kicker">01 / BUILD YOUR QUESTION</span><h2 id="builder-title">把问题装进“天气购物车”</h2></div><p>城市决定看哪里，日期决定看何时，指标决定只取什么。</p></div>
+      <div id="ai-summary" class="ai-summary" role="status">✦ 已预置一个示例：比较武汉与成都 2025 年 8 月的平均气温和降水，并对照常年。</div>
+      <div class="builder-grid">
+        <div class="selection-stack">
+          <section class="panel" aria-labelledby="mode-title"><div class="panel-heading"><span class="step">01</span><div><h3 id="mode-title">先选数据类型</h3><p>实况与预报的时间含义不同，不能混成一个查询。</p></div></div><div class="mode-grid"><button type="button" class="mode-card active" data-mode="history" aria-pressed="true"><strong>历史实况 <span>→ 常年对比</span></strong><small>已经发生的天气；可选同日常年基线</small></button><button type="button" class="mode-card" data-mode="forecast" aria-pressed="false"><strong>预报快照 <span>→ 保留当时版本</span></strong><small>先选制作日，再看被预报的日期</small></button></div></section>
+          <section class="panel" aria-labelledby="city-title"><div class="panel-heading"><span class="step">02</span><div><h3 id="city-title">加入城市</h3><p>点击“＋”添加。公开演示提供五座样例城市，正式城市范围不以此为限。</p></div></div><div id="city-options" class="option-grid cities"></div></section>
+          <section class="panel" aria-labelledby="date-title"><div class="panel-heading"><span class="step">03</span><div><h3 id="date-title">选择日期</h3><p id="date-explainer">历史实况按被观测的业务日期筛选，包含开始和结束当天。</p></div></div><div id="made-date-wrap" class="made-date-wrap hidden"><label for="made-date">预报制作日 <span>这版预报是什么时候做的？</span></label><select id="made-date"><option value="2026-09-20">2026-09-20 · 示例批次 B</option><option value="2026-09-19">2026-09-19 · 示例批次 A</option></select></div><div class="date-grid"><label for="date-start">目标日期 · 从<input id="date-start" type="date" value="2025-08-01"></label><label for="date-end">目标日期 · 到<input id="date-end" type="date" value="2025-08-31"></label></div><p id="date-note" class="field-note">历史样例支持指定连续日期，单次最多 62 天。</p></section>
+          <section class="panel" aria-labelledby="metric-title"><div class="panel-heading"><span class="step">04</span><div><h3 id="metric-title">加入气象指标</h3><p>只选问题所需指标，中文名称、单位与对应字段一起显示。</p></div></div><div id="metric-options" class="option-grid metrics"></div><label id="baseline-row" class="baseline-row"><input id="baseline-toggle" type="checkbox" checked><span><strong>对照常年同日</strong><small>仅为存在对应基线的指标计算偏离；不会虚构“最高温常年值”。</small></span></label></section>
+        </div>
+        <aside class="cart panel" aria-labelledby="cart-title"><div class="cart-head"><div><span class="section-kicker">YOUR SELECTION</span><h3 id="cart-title">天气购物车 <span id="cart-count">0 项</span></h3></div><span class="cart-icon" aria-hidden="true">◫</span></div><div class="cart-section"><h4>城市</h4><div id="cart-cities" class="chips"></div></div><div class="cart-section"><h4>时间</h4><div id="cart-time" class="chips"></div></div><div class="cart-section"><h4>气象指标</h4><div id="cart-metrics" class="chips"></div></div><div class="cart-section"><h4>事实类型</h4><div id="cart-facts" class="chips"></div></div><div class="cart-estimate" id="cart-estimate"></div><div id="cart-error" class="cart-error hidden" role="alert"></div><button id="run-query" class="primary-button wide" type="button">生成演示结果 ↗</button><button id="reset-selection" class="plain-button" type="button">重置为示例</button><p class="cart-foot">真实系统需要独立的天气只读授权；这里不提供可执行接口或口令。</p></aside>
+      </div>
+    </section>
+
+    <section class="results" id="results" aria-labelledby="result-title"><div class="section-title"><div><span class="section-kicker">02 / ONLY WHAT YOU NEED</span><h2 id="result-title">只看这次选中的结果</h2></div><span class="result-tag">SYNTHETIC DATA · 非真实天气</span></div><div id="result-placeholder" class="result-placeholder">先在购物车确认城市、时间和指标，再生成结果。</div><div id="result-body" class="hidden"><div id="result-intro" class="result-intro"></div><div class="result-grid"><article class="result-card chart-card"><div class="result-card-head"><div><h3>逐日趋势</h3><p>每个城市一条线；可切换已选指标。</p></div><label for="chart-metric">图表指标 <select id="chart-metric"></select></label></div><div id="chart" class="chart"></div><div id="chart-legend" class="chart-legend"></div></article><article class="result-card summary-card"><div class="result-card-head"><div><h3>按城市汇总</h3><p>只汇总购物车里的指标与日期。</p></div></div><div id="summary" class="summary"></div></article></div><article class="result-card handoff"><div class="result-card-head"><div><h3>交给自己 AI 的取数需求</h3><p>这是结构化说明，不是已经执行的真实数仓命令。</p></div><button id="copy-request" class="secondary-button" type="button">复制说明</button></div><textarea id="request-text" readonly aria-label="只读取数需求说明"></textarea><div id="copy-status" class="copy-status" role="status"></div></article></div></section>
+
+    <footer>© 2026 孙宇星 · 天气数据产品公开演示　<a href="projects/weather.html">了解项目判断 →</a></footer>
+  </main>
+
+  <button id="ai-float" class="ai-float" type="button" aria-controls="ai-panel" aria-expanded="false">✦ <span>AI 问天气</span></button>
+  <div id="ai-backdrop" class="ai-backdrop hidden"></div>
+  <aside id="ai-panel" class="ai-panel hidden" role="dialog" aria-modal="true" aria-labelledby="ai-title"><div class="ai-panel-head"><div><small>WEATHER QUESTION</small><h2 id="ai-title">AI 问天气 <span>规则模拟</span></h2></div><button id="ai-close" type="button" aria-label="关闭 AI 问天气">×</button></div><div class="ai-panel-body"><div class="chat-bubble assistant"><strong>你好，想分析什么天气数据？</strong><p>我可以推荐城市、日期与指标；这版还没有接入 DeepSeek，超出示例能力会明确说明。</p></div><div class="sample-questions"><span>试试这些问题</span><button type="button" data-example="history">武汉和成都 2025 年 8 月平均气温、降水，与常年相比</button><button type="button" data-example="forecast">看武汉和成都 9 月 20 日制作的未来预报</button><button type="button" data-example="clarify">武汉最高温比常年高多少？</button></div><div id="ai-answer" class="chat-bubble assistant reply hidden"></div><div id="ai-choices" class="ai-choices"></div></div><form id="ai-form" class="ai-form"><label for="ai-input">你的问题</label><textarea id="ai-input" rows="3" placeholder="例如：比较武汉和成都去年8月的平均气温和降水"></textarea><button class="primary-button" type="submit">理解需求 ↗</button></form></aside>
+</body>
+</html>

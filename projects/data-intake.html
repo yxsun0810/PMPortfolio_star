@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="数据接入与流通工作台：来源识别、批次追溯、质量门与正式发布的产品案例。">
+  <title>数据接入与流通工作台 · Star 作品集</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳转到正文</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html#top" aria-label="返回 Star 作品集首页"><span class="brand-mark">S<span class="brand-dot">.</span></span><span class="brand-copy"><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="../index.html#top">首页</a><a href="../index.html#overview">精选项目</a><a href="#case-content" aria-current="page">当前案例</a></nav>
+    <div class="header-actions"><button class="theme-toggle" type="button" aria-label="切换夜间模式" aria-pressed="false"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">夜间</span></button><a class="header-cta" href="../index.html#overview">全部项目 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="detail-shell" id="content">
+    <div class="breadcrumb"><a href="../index.html#overview">精选项目</a><span aria-hidden="true">/</span><span>数据接入与流通工作台</span></div>
+    <section class="detail-hero intake" aria-labelledby="project-title">
+      <div><div class="kicker">CASE 01 / DATA FLOW</div><h1 id="project-title">让每一批数据都有清楚的来路和状态</h1><p>多种业务系统、自动化文件和人工补充数据进入同一条链路。业务人员需要知道数据是否真正可用，以及问题停在了哪里。</p><div class="detail-hero-actions"><a class="button button-primary" href="#case-content">阅读项目详情 <span aria-hidden="true">↓</span></a></div></div>
+      <div class="detail-hero-visual" aria-hidden="true"><span>来源登记</span><i>→</i><span>批次预检</span><i>→</i><span>质量门</span><i>→</i><span>正式流通</span></div>
+    </section>
+    <section class="detail-facts" aria-label="项目概况"><div><span>业务场景</span><strong>企业多源数据进入统一数仓</strong></div><div><span>我的参与</span><strong>需求与流程、状态规则、验收口径、交接</strong></div><div><span>关键问题</span><strong>如何判断数据当前能否使用</strong></div></section>
+    <article class="detail-content" id="case-content">
+      <section><span class="detail-index">01 / PROBLEM</span><h2>问题如何定义</h2><p>“收到了文件”常被误认为“数据已经入仓”。实际链路还包括来源识别、字段检查、批次配对、质量校验和正式发布。若只显示一个成功状态，业务人员无法判断数据新鲜度，也难以定位异常。</p></section>
+      <section><span class="detail-index">02 / DECISIONS</span><h2>方案与关键取舍</h2><ul><li>按来源、业务日期和批次建立交付记录；上传时间只说明何时收到，不代替数据所属日期。</li><li>将接收、预检、原始入仓、候选加工、质量通过和正式发布拆成独立状态。</li><li>为压缩包设置清单校验，为关联文件设置配对规则；异常批次隔离并保留原因。</li><li>先在候选数据中校验完整性和业务口径，再切换正式数据，让下游持续读到完整版本。</li></ul></section>
+      <section class="detail-judgment"><span class="detail-index">03 / PRODUCT JUDGMENT</span><h2>核心产品判断</h2><p>工作台首先要回答“现在能不能用、为什么”。绿色的上传回执不能代替正式数据验收；状态必须对应真实处理阶段。</p></section>
+      <section><span class="detail-index">04 / OUTCOME</span><h2>形成的能力与验证</h2><p>形成来源契约、批次追溯、异常隔离和分阶段状态展示；历史资料记录了针对自动化投递、候选发布与下游取数的专项核查。公开版不展示内部批次、源文件和生产指标。</p></section>
+    </article>
+    <section class="case-preview" aria-labelledby="preview-title"><div class="preview-heading"><div><span class="detail-index">SCENARIO PREVIEW / 合成演示</span><h2 id="preview-title">这一批数据能发布吗？</h2><p>切换示例批次，观察配对检查如何影响正式发布。</p></div><span class="preview-label">浏览器内模拟</span></div><div class="demo-layout"><div class="demo-input"><span class="input-label">选择批次</span><div class="choice-row"><button type="button" data-batch="complete" aria-pressed="true">文件齐全</button><button type="button" data-batch="missing" aria-pressed="false">缺少配对文件</button></div><button type="button" class="run-button" id="run-intake">运行接入检查</button></div><div class="demo-result" id="intake-result" aria-live="polite"><strong>等待检查</strong><p>选择一个批次并运行，查看它能否进入正式数据。</p><ol class="stage-list" id="intake-stages"><li>1 接收批次</li><li>2 清单与文件预检</li><li>3 配对检查</li><li>4 候选质量门</li><li>5 正式发布</li></ol></div></div><p class="preview-foot">示例只改变本页显示状态，不连接真实数据链路。</p></section>
+    <nav class="detail-next" aria-label="项目导航"><a href="../index.html#overview">← 返回全部项目</a><a href="catalog.html">下一项目：数仓前台 →</a></nav>
+    <footer>© 2026 Star · PMPortfolio_star</footer>
+  </main>
+  <script src="../site.js" defer></script>
+  <script>
+    let selectedBatch = 'complete';
+    const batchButtons = [...document.querySelectorAll('[data-batch]')];
+    batchButtons.forEach(button => button.addEventListener('click', () => {
+      selectedBatch = button.dataset.batch;
+      batchButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    }));
+    document.getElementById('run-intake').addEventListener('click', () => {
+      const passed = selectedBatch === 'complete';
+      const result = document.getElementById('intake-result');
+      const stages = [...document.querySelectorAll('#intake-stages li')];
+      result.querySelector('strong').textContent = passed ? '可发布：候选检查通过' : '已隔离：缺少配对文件';
+      result.querySelector('p').textContent = passed
+        ? '文件齐全并通过示例质量门；正式数据切换为完整的新版本。'
+        : '接收与预检完成，但配对检查未通过。候选加工及正式发布停止，原版本继续可用。';
+      stages.forEach((stage, i) => { stage.className = i < (passed ? 5 : 2) ? 'done' : i === 2 && !passed ? 'blocked' : ''; });
+    });
+  </script>
+</body>
+</html>

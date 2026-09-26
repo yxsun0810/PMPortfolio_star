@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="天气数据产品案例：城市维度、历史实况、气候基线、预报快照与版本发布。">
+  <title>天气数据产品 · Star 作品集</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳转到正文</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html#top" aria-label="返回 Star 作品集首页"><span class="brand-mark">S<span class="brand-dot">.</span></span><span class="brand-copy"><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="../index.html#top">首页</a><a href="../index.html#overview">精选项目</a><a href="#case-content" aria-current="page">当前案例</a></nav>
+    <div class="header-actions"><button class="theme-toggle" type="button" aria-label="切换夜间模式" aria-pressed="false"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">夜间</span></button><a class="header-cta" href="../index.html#overview">全部项目 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="detail-shell" id="content">
+    <div class="breadcrumb"><a href="../index.html#overview">精选项目</a><span aria-hidden="true">/</span><span>天气数据产品</span></div>
+    <section class="detail-hero weather" aria-labelledby="project-title">
+      <div><div class="kicker">CASE 03 / WEATHER FACTS</div><h1 id="project-title">让天气数据可以回看，也可以复用</h1><p>天气接口给的是当下响应。业务分析需要稳定的城市身份、历史事实、长期基线和“当时的预测”。</p><div class="detail-hero-actions"><a class="button button-primary" href="#case-content">阅读项目详情 <span aria-hidden="true">↓</span></a></div></div>
+      <div class="detail-hero-visual" aria-hidden="true"><span>城市维度</span><i>+</i><span>每日实况</span><i>+</i><span>气候基线</span><i>+</i><span>预报快照</span></div>
+    </section>
+    <section class="detail-facts" aria-label="项目概况"><div><span>业务场景</span><strong>全国城市天气事实供多个业务系统只读使用</strong></div><div><span>我的参与</span><strong>数据产品结构、质量与发布边界梳理</strong></div><div><span>关键问题</span><strong>保留历史与预测的当时版本</strong></div></section>
+    <article class="detail-content" id="case-content">
+      <section><span class="detail-index">01 / PROBLEM</span><h2>问题如何定义</h2><p>仅保存最新天气会丢失历史视角，也无法评估此前预测是否准确；若业务规则直接混入公共天气数据，不同使用方会难以复用同一份事实。</p></section>
+      <section><span class="detail-index">02 / DECISIONS</span><h2>方案与关键取舍</h2><ul><li>分开管理城市维度、每日实况、长期气候基线和带制作时间的预报快照。</li><li>按批次采集 300 多个城市；对近期历史做周期性回拉，以吸收上游后续修正。</li><li>设置完整率与文件校验门槛，生成不可变数据版本；消费者只读取已发布的完整版本。</li><li>公共天气事实与企业专有阈值分离。系统提供异常信号，业务动作仍由人确认。</li></ul></section>
+      <section class="detail-judgment"><span class="detail-index">03 / PRODUCT JUDGMENT</span><h2>核心产品判断</h2><p>“天气事实”和“经营判断”处在不同层。保留当时的预测版本，才能在未来解释一个业务信号是如何产生的。</p></section>
+      <section><span class="detail-index">04 / OUTCOME</span><h2>形成的能力与验证</h2><p>形成城市、实况、气候基线与预报快照四类数据结构，以及质量校验、版本切换和恢复机制。这里展示设计与历史资料中的运行口径，不把它写成销售增长结果。</p></section>
+    </article>
+    <section class="case-preview" aria-labelledby="preview-title"><div class="preview-heading"><div><span class="detail-index">SCENARIO PREVIEW / 合成演示</span><h2 id="preview-title">天气偏离常态时发生什么？</h2><p>调整合成实况温度，观察它与示例气候常态的差值。</p></div><span class="preview-label">浏览器内模拟</span></div><div class="demo-layout"><div class="demo-input"><label for="demo-temperature">示例城市实况温度</label><input id="demo-temperature" type="range" min="10" max="35" value="22" step="1"><div class="value-line"><span>10°C</span><strong id="temperature-value">22°C</strong><span>35°C</span></div><span class="note">示例常态 20°C；演示阈值为偏差达到 5°C。该阈值不代表正式业务规则。</span></div><div class="demo-result" id="weather-result" aria-live="polite"><strong>等待计算</strong></div></div><p class="preview-foot">示例只改变本页显示状态，不连接真实天气服务。</p></section>
+    <nav class="detail-next" aria-label="项目导航"><a href="catalog.html">← 上一项目：数仓前台</a><a href="../index.html#overview">返回全部项目 →</a></nav>
+    <footer>© 2026 Star · PMPortfolio_star</footer>
+  </main>
+  <script src="../site.js" defer></script>
+  <script>
+    const temperature = document.getElementById('demo-temperature');
+    function updateWeather() {
+      const value = Number(temperature.value);
+      const delta = value - 20;
+      const signal = Math.abs(delta) >= 5;
+      document.getElementById('temperature-value').textContent = `${value}°C`;
+      const result = document.getElementById('weather-result');
+      result.querySelector('strong').textContent = signal ? '形成候选天气信号' : '未达到演示阈值';
+      result.querySelector('p')?.remove();
+      const paragraph = document.createElement('p');
+      paragraph.textContent = `${delta === 0 ? '与示例常态一致。' : `相对示例常态${delta > 0 ? '偏高' : '偏低'} ${Math.abs(delta)}°C。`}${signal ? '系统提示复核，是否采取业务动作仍由人判断。' : '继续记录事实，无需触发示例预警。'}`;
+      result.appendChild(paragraph);
+    }
+    temperature.addEventListener('input', updateWeather);
+    updateWeather();
+  </script>
+</body>
+</html>

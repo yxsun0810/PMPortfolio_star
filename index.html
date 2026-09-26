@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Star 的产品经理作品集：数据接入与流通工作台、数仓前台、天气数据产品三个案例。">
+  <meta name="description" content="Star 的数据产品经理作品集：数据接入与流通、数仓前台、天气数据产品三个项目案例与可体验演示。">
   <meta name="theme-color" content="#101b2d">
   <title>Star · 数据产品作品集</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101b2d'/%3E%3Cpath d='M14 45h36M17 35l11-16 9 13 10-9' fill='none' stroke='%23ffb45e' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -14,11 +14,11 @@
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Star 数据产品作品集首页"><span class="brand-mark">S<span class="brand-dot">.</span></span><span class="brand-copy"><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
     <nav class="site-nav" aria-label="主导航">
-      <a href="#overview">精选案例</a>
-      <a href="catalog-demo.html">完整 Demo</a>
-      <a href="#intake">产品思考</a>
+      <a href="#top" data-section="top">首页</a>
+      <a href="#overview" data-section="overview">精选项目</a>
+      <a href="#approach" data-section="approach">产品思考</a>
     </nav>
-    <a class="header-cta" href="catalog-demo.html">体验完整 Demo <span aria-hidden="true">↗</span></a>
+    <div class="header-actions"><button class="theme-toggle" type="button" aria-label="切换夜间模式" aria-pressed="false"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">夜间</span></button><a class="header-cta" href="#overview">查看项目 <span aria-hidden="true">↗</span></a></div>
   </header>
   <div class="shell">
     <main id="content">
@@ -26,8 +26,8 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-line"></span> 数据产品经理作品集 <span class="eyebrow-en">/ SELECTED WORK</span></div>
           <h1 id="hero-title">让数据从“到了”，<br><em>走向可信、可用。</em></h1>
-          <p class="lead">我参与企业数据平台建设，聚焦数据接入状态、业务找数与受控取数，以及可回溯的天气数据产品。这里呈现问题如何被定义、关键判断如何形成，以及能力如何落地。</p>
-          <div class="hero-actions"><a class="button button-primary" href="#overview">查看精选案例 <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="catalog-demo.html">体验完整 Demo <span aria-hidden="true">→</span></a></div>
+          <p class="lead">我参与企业数据平台建设，聚焦数据接入状态、业务找数与受控取数，以及可回溯的天气数据产品。以下三个项目分别呈现业务问题、产品判断和可验证的成果。</p>
+          <div class="hero-actions"><a class="button button-primary" href="#overview">查看精选项目 <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#approach">了解我的产品思考 <span aria-hidden="true">→</span></a></div>
           <div class="hero-tags" aria-label="能力方向"><span>需求与流程</span><span>数据质量</span><span>权限与审计</span><span>跨系统协作</span></div>
         </div>
         <div class="hero-visual" role="img" aria-label="数据来源、质量校验与受控使用的抽象流程图；仅为概念示意">
@@ -46,243 +46,35 @@
       </section>
 
       <section id="overview" aria-labelledby="overview-title">
-        <div class="section-head"><div><div class="kicker">01 / SELECTED CASES</div><h2 id="overview-title">三个案例，一条数据价值链。</h2></div><p>从来源接收、质量控制，到业务可理解的安全使用。选择一个场景，查看背后的产品判断。</p></div>
+        <div class="section-head"><div><div class="kicker">01 / SELECTED PROJECTS</div><h2 id="overview-title">三个项目，三种数据产品问题。</h2></div><p>点“查看详情”了解产品决策；有完整交互页面的项目，可直接点“体验 Demo”。</p></div>
         <div class="overview">
-          <a class="project-card" href="#intake"><div class="project-cover cover-intake" aria-hidden="true"><div class="cover-label"><span>DATA FLOW</span><span>01 / 03</span></div><div class="mock-window"><div class="mock-top"><i></i><i></i><i></i><span>批次状态 / 概念图</span></div><div class="mock-row"><b>接收完成</b><span class="mock-progress"></span><em>READY</em></div><div class="mock-row"><b>质量预检</b><span class="mock-progress half"></span><em>CHECK</em></div><div class="mock-row"><b>正式流通</b><span class="mock-progress light"></span><em>WAIT</em></div></div></div><div class="project-copy"><span class="num">01 / 数据链路</span><strong>数据接入与流通工作台</strong><small>把“文件已上传”拆解成可追踪、可判断的处理进度。</small><span class="project-link">阅读案例 <span aria-hidden="true">↗</span></span></div></a>
-          <a class="project-card" href="#catalog"><div class="project-cover cover-catalog" aria-hidden="true"><div class="cover-label"><span>AI DATA SHOPPING</span><span>02 / 03</span></div><div class="mock-search"><span>✦</span> 比较去年 8 月与今年 8 月销量 <i>↗</i></div><div class="mock-table"><div><span>年份 · year</span><b>＋ 已选</b></div><div><span>月份 · month</span><b>＋ 已选</b></div><div><span>支付件数 · paid_qty</span><b>＋ 加入</b></div></div></div><div class="project-copy"><span class="num">02 / 数据使用</span><strong>数仓前台</strong><small>像购物一样选择字段与时间，再把受控取数命令交给自己的 AI。</small><span class="project-link">阅读案例 <span aria-hidden="true">↗</span></span></div></a>
-          <a class="project-card" href="#weather"><div class="project-cover cover-weather" aria-hidden="true"><div class="cover-label"><span>WEATHER FACTS</span><span>03 / 03</span></div><div class="weather-graphic"><span class="weather-sun"></span><div class="weather-reading"><small>示例温度 / °C</small><strong>22<span>°</span></strong><span>历史 · 实况 · 预报</span></div><svg viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62 C38 67 46 22 83 32 S135 75 173 48 S223 16 257 44 S293 66 320 19" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div></div><div class="project-copy"><span class="num">03 / 公共数据产品</span><strong>天气数据产品</strong><small>将接口数据变成可回溯、可发布的公共事实。</small><span class="project-link">阅读案例 <span aria-hidden="true">↗</span></span></div></a>
+          <article class="project-card">
+            <div class="project-cover cover-intake" aria-hidden="true"><div class="cover-label"><span>DATA FLOW</span><span>01 / 03</span></div><div class="mock-window"><div class="mock-top"><i></i><i></i><i></i><span>批次状态 / 概念图</span></div><div class="mock-row"><b>接收完成</b><span class="mock-progress"></span><em>READY</em></div><div class="mock-row"><b>质量预检</b><span class="mock-progress half"></span><em>CHECK</em></div><div class="mock-row"><b>正式流通</b><span class="mock-progress light"></span><em>WAIT</em></div></div></div>
+            <div class="project-copy"><span class="num">01 / 数据链路</span><h3>数据接入与流通工作台</h3><p>把“文件已上传”拆解成可追踪、可判断的处理进度。</p><div class="project-tags"><span>来源接入</span><span>质量门</span><span>批次追溯</span></div><div class="project-actions"><a class="project-detail-link" href="projects/data-intake.html">查看详情 <span aria-hidden="true">→</span></a></div></div>
+          </article>
+          <article class="project-card">
+            <div class="project-cover cover-catalog" aria-hidden="true"><div class="cover-label"><span>AI DATA SHOPPING</span><span>02 / 03</span></div><div class="mock-search"><span>✦</span> 比较去年 8 月与今年 8 月销量 <i>↗</i></div><div class="mock-table"><div><span>年份 · year</span><b>＋ 已选</b></div><div><span>月份 · month</span><b>＋ 已选</b></div><div><span>支付件数 · paid_qty</span><b>＋ 加入</b></div></div></div>
+            <div class="project-copy"><span class="num">02 / 数据使用</span><h3>数仓前台</h3><p>像购物一样选择字段与时间，再把受控取数命令交给自己的 AI。</p><div class="project-tags"><span>AI 问数</span><span>字段购物车</span><span>只读取数</span></div><div class="project-actions"><a class="project-detail-link" href="projects/catalog.html">查看详情 <span aria-hidden="true">→</span></a><a class="project-demo-link" href="catalog-demo.html" target="_blank" rel="noopener">体验 Demo <span aria-hidden="true">↗</span></a></div></div>
+          </article>
+          <article class="project-card">
+            <div class="project-cover cover-weather" aria-hidden="true"><div class="cover-label"><span>WEATHER FACTS</span><span>03 / 03</span></div><div class="weather-graphic"><span class="weather-sun"></span><div class="weather-reading"><small>示例温度 / °C</small><strong>22<span>°</span></strong><span>历史 · 实况 · 预报</span></div><svg viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62 C38 67 46 22 83 32 S135 75 173 48 S223 16 257 44 S293 66 320 19" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+            <div class="project-copy"><span class="num">03 / 公共数据产品</span><h3>天气数据产品</h3><p>将接口数据变成可回溯、可发布的公共事实。</p><div class="project-tags"><span>数据版本</span><span>历史事实</span><span>质量校验</span></div><div class="project-actions"><a class="project-detail-link" href="projects/weather.html">查看详情 <span aria-hidden="true">→</span></a></div></div>
+          </article>
         </div>
       </section>
 
-      <section class="demo" id="demo" aria-labelledby="demo-title">
-        <div class="demo-head"><div class="kicker">Interactive demo · 合成演示</div><h2 id="demo-title">亲手走一遍数据产品的判断</h2><p>选择场景，观察状态与结果如何变化。全部样例均为虚构，不连接真实业务系统。</p></div>
-        <div class="demo-tabs" role="tablist" aria-label="演示场景">
-          <button type="button" id="tab-intake" role="tab" aria-controls="panel-intake" aria-selected="true" tabindex="0">01 数据接入</button>
-          <button type="button" id="tab-catalog" role="tab" aria-controls="panel-catalog" aria-selected="false" tabindex="-1">02 数仓找数</button>
-          <button type="button" id="tab-weather" role="tab" aria-controls="panel-weather" aria-selected="false" tabindex="-1">03 天气信号</button>
+      <section class="approach-section" id="approach" aria-labelledby="approach-title">
+        <div class="section-head"><div><div class="kicker">02 / HOW I THINK</div><h2 id="approach-title">把“能用”变成可验证的判断。</h2></div><p>不同项目的共同点，是先厘清事实、状态和使用边界，再决定界面该如何表达。</p></div>
+        <div class="approach-grid">
+          <article><span>01</span><h3>状态说明处理到了哪一步</h3><p>上传回执、质量通过与正式可用各有含义；业务人员可以追到异常停在哪一环。</p><a href="projects/data-intake.html">看数据接入案例 →</a></article>
+          <article><span>02</span><h3>问题决定本次取哪些数据</h3><p>先确认粒度、字段与时间，再生成只读命令，避免一口气取出整张表。</p><a href="projects/catalog.html">看数仓前台案例 →</a></article>
+          <article><span>03</span><h3>公共事实保留自己的版本</h3><p>天气实况、历史与预报分别留痕，业务判断才有可回看的依据。</p><a href="projects/weather.html">看天气数据案例 →</a></article>
         </div>
-        <div class="demo-panel" id="panel-intake" role="tabpanel" aria-labelledby="tab-intake">
-          <h3>这一批数据能发布吗？</h3><p>模拟一个需要原始表与加工表配对的数据批次。</p>
-          <div class="demo-layout">
-            <div class="demo-input"><span class="input-label">选择批次</span><div class="choice-row" id="intake-choices"><button type="button" data-batch="complete" aria-pressed="true">文件齐全</button><button type="button" data-batch="missing" aria-pressed="false">缺少配对文件</button></div><button type="button" class="run-button" id="run-intake">运行接入检查</button></div>
-            <div class="demo-result" id="intake-result" aria-live="polite"><strong>等待检查</strong><p>选择一个批次并运行，查看它能否进入正式数据。</p><ol class="stage-list" id="intake-stages"><li>1 接收批次</li><li>2 清单与文件预检</li><li>3 配对检查</li><li>4 候选质量门</li><li>5 正式发布</li></ol></div>
-          </div>
-        </div>
-        <div class="demo-panel" id="panel-catalog" role="tabpanel" aria-labelledby="tab-catalog" hidden>
-          <h3>把业务问题装进“字段购物车”</h3><p>AI 只推荐回答当前问题所需的字段，并把时间范围写进最终取数命令。</p><p><a class="button button-primary" href="catalog-demo.html">打开完整数仓前台体验 <span aria-hidden="true">↗</span></a></p>
-          <div class="catalog-ask">
-            <label for="catalog-question">你想分析什么？</label>
-            <div class="catalog-question-row"><input id="catalog-question" value="比较去年 8 月和今年 8 月的电商销量同比、环比"><button type="button" class="run-button" id="run-catalog">AI 帮我找数</button></div>
-            <div class="catalog-examples" aria-label="示例问题"><button type="button" data-catalog-example="monthly">8 月同比与环比</button><button type="button" data-catalog-example="daily">8 月 3–17 日按款销量</button></div>
-          </div>
-          <div class="catalog-workspace" id="catalog-workspace" hidden>
-            <div class="catalog-source-column"><div class="catalog-answer" id="catalog-answer" aria-live="polite"></div><div id="catalog-source"></div></div>
-            <aside class="catalog-cart" aria-label="字段购物车"><div class="catalog-cart-head"><strong>字段购物车</strong><span id="catalog-count">0 项</span></div><div id="catalog-cart-items" class="catalog-cart-items"><p>点击字段旁的“＋”加入。</p></div><div class="catalog-time" id="catalog-daily-time" hidden><strong>取数日期</strong><label>开始 <input type="date" id="catalog-date-from" value="2026-08-03"></label><label>结束 <input type="date" id="catalog-date-to" value="2026-08-17"></label></div><div class="catalog-time" id="catalog-monthly-time"><strong>比较月份</strong><label>同比基期 <input type="month" id="catalog-month-yoy" value="2025-08"></label><label>环比基期 <input type="month" id="catalog-month-mom" value="2026-07"></label><label>当前期 <input type="month" id="catalog-month-current" value="2026-08"></label></div><p class="catalog-error" id="catalog-error" role="alert"></p><button type="button" class="run-button catalog-generate" id="catalog-generate" disabled>生成 AI 取数命令</button></aside>
-          </div>
-          <div class="catalog-command" id="catalog-command" hidden><div><strong>可复制的 AI 取数命令</strong><span>仅含合成数据集与占位接口，不含真实地址或令牌</span></div><pre id="catalog-command-text"></pre><button type="button" class="catalog-copy" id="catalog-copy">复制命令</button></div>
-        </div>
-        <div class="demo-panel" id="panel-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
-          <h3>天气偏离常态时发生什么？</h3><p>调整合成实况温度，观察它与示例气候常态的差值。</p>
-          <div class="demo-layout">
-            <div class="demo-input"><label for="demo-temperature">示例城市实况温度</label><input id="demo-temperature" type="range" min="10" max="35" value="22" step="1"><div class="value-line"><span>10°C</span><strong id="temperature-value">22°C</strong><span>35°C</span></div><span class="note">示例常态 20°C；演示阈值为偏差达到 5°C。该阈值不代表正式业务规则。</span></div>
-            <div class="demo-result" id="weather-result" aria-live="polite"><strong>等待计算</strong></div>
-          </div>
-        </div>
-        <button type="button" class="demo-reset" id="reset-demo">重置演示</button>
-        <div class="demo-disclaimer">演示结果仅由页面中的合成输入与示例规则生成；不读取生产数据库，不触发发布或业务动作。</div>
       </section>
 
-      <article class="case" id="intake" aria-labelledby="intake-title">
-        <div class="case-top"><div class="kicker">Case 01 · 数据接入与流通</div><h2 id="intake-title">让每一批数据都有清楚的来路和状态</h2><p class="case-intro">多种业务系统、自动化文件和人工补充数据进入同一条链路。业务人员需要知道数据是否真正可用，以及问题停在了哪里。</p></div>
-        <div class="case-body">
-          <dl class="meta"><div><dt>场景</dt><dd>企业多源数据进入统一数仓</dd></div><div><dt>我的参与</dt><dd>需求与流程梳理、状态规则、验收口径和交接</dd></div></dl>
-          <h3>问题如何定义</h3><p>“收到了文件”常被误认为“数据已经入仓”。实际链路还包括来源识别、字段检查、批次配对、质量校验和正式发布。若只显示一个成功状态，业务人员无法判断数据新鲜度，也难以定位异常。</p>
-          <h3>方案与关键取舍</h3>
-          <ul><li>按来源、业务日期和批次建立交付记录；上传时间只说明何时收到，不代替数据所属日期。</li><li>将接收、预检、原始入仓、候选加工、质量通过和正式发布拆成独立状态。</li><li>为压缩包设置清单校验，为关联文件设置配对规则；异常批次隔离并保留原因。</li><li>先在候选数据中校验完整性和业务口径，再切换正式数据，让下游持续读到完整版本。</li></ul>
-          <div class="flow" aria-label="接入流程"><span>来源登记</span><i>→</i><span>批次预检</span><i>→</i><span>异常隔离 / 入仓</span><i>→</i><span>候选质量门</span><i>→</i><span>正式流通</span></div>
-          <div class="decision"><strong>核心产品判断</strong><p>工作台首先要回答“现在能不能用、为什么”，因此状态必须代表真实处理阶段；绿色的上传回执不能替代正式数据验收。</p></div>
-          <div class="outcome"><h3>形成的能力与验证</h3><p>形成了来源契约、批次追溯、异常隔离和分阶段状态展示；历史资料记录了针对自动化投递、候选发布与下游取数的专项核查。公开版不展示内部批次、源文件和生产指标。</p></div>
-        </div>
-      </article>
-
-      <article class="case" id="catalog" aria-labelledby="catalog-title">
-        <div class="case-top"><div class="kicker">Case 02 · 数仓前台</div><h2 id="catalog-title">让业务人员像购物一样完成取数准备</h2><p class="case-intro">业务人员说出问题，系统推荐恰好的数据集、字段和时间条件，再生成可交给 AI 执行的只读命令。</p></div>
-        <div class="case-body">
-          <dl class="meta"><div><dt>场景</dt><dd>自然语言找数、按需选字段与限定时间范围</dd></div><div><dt>我的参与</dt><dd>问数路径、字段选择体验、时间边界和安全取数规则</dd></div></dl>
-          <h3>问题如何定义</h3><p>业务人员往往只会说“我想看销量同比和环比”，却不知道该选日表还是月表、需要哪些时间键和指标。若直接返回整表，不仅信息过载，也容易误用时间范围或字段口径。</p>
-          <h3>方案与关键取舍</h3>
-          <ul><li>让 AI 先理解业务问题，只检索元数据并推荐候选数据集；口径不清时先追问，不假装已经取到结果。</li><li>字段同时展示中文业务名和技术字段名，用户通过“＋”加入购物车，最终只请求本次需要的列。</li><li>日数据限定起止日期，月度比较明确列出同比基期、环比基期和当前期；缺少或冲突时停止生成命令。</li><li>生成的命令仍使用只读接口、分页和权限校验；公开演示只保留占位地址与合成名称。</li></ul>
-          <div class="flow" aria-label="AI 找数流程"><span>说出业务问题</span><i>→</i><span>推荐数据集</span><i>→</i><span>字段加入购物车</span><i>→</i><span>确认时间</span><i>→</i><span>生成 AI 取数命令</span></div>
-          <div class="decision"><strong>核心产品判断</strong><p>“AI 问数”不是直接把整张表交给用户，而是把模糊问题收敛成最小字段集和明确时间窗口，再交给受控接口执行。</p></div>
-          <div class="outcome"><h3>形成的能力与验证</h3><p>形成自然语言找数、来源说明、字段购物车、日/月时间约束和命令生成闭环；演示覆盖连续日期与离散月份两种路径，并阻止无时间范围的整表请求。</p></div>
-        </div>
-      </article>
-
-      <article class="case" id="weather" aria-labelledby="weather-title">
-        <div class="case-top"><div class="kicker">Case 03 · 天气数据产品</div><h2 id="weather-title">让天气数据可以回看，也可以复用</h2><p class="case-intro">天气接口给的是当下响应。业务分析需要稳定的城市身份、历史事实、长期基线和“当时的预测”。</p></div>
-        <div class="case-body">
-          <dl class="meta"><div><dt>场景</dt><dd>全国城市天气事实供多个业务系统只读使用</dd></div><div><dt>我的参与</dt><dd>数据产品结构、质量与发布边界梳理</dd></div></dl>
-          <h3>问题如何定义</h3><p>仅保存最新天气会丢失历史视角，也无法评估此前预测是否准确；若业务规则直接混入公共天气数据，不同使用方会难以复用同一份事实。</p>
-          <h3>方案与关键取舍</h3>
-          <ul><li>分开管理城市维度、每日实况、长期气候基线和带制作时间的预报快照。</li><li>按批次采集 300 多个城市；对近期历史做周期性回拉，以吸收上游后续修正。</li><li>设置完整率与文件校验门槛，生成不可变数据版本；消费者只读取已发布的完整版本。</li><li>公共天气事实与企业专有阈值分离。系统提供异常信号，业务动作仍由人确认。</li></ul>
-          <div class="flow" aria-label="天气数据流程"><span>接口采集</span><i>→</i><span>历史 / 预报建模</span><i>→</i><span>质量校验</span><i>→</i><span>版本发布</span><i>→</i><span>业务只读使用</span></div>
-          <div class="decision"><strong>核心产品判断</strong><p>“天气事实”和“经营判断”处在不同层。保留当时的预测版本，才能在未来解释一个业务信号是如何产生的。</p></div>
-          <div class="outcome"><h3>形成的能力与验证</h3><p>形成城市、实况、气候基线与预报快照四类数据结构，以及质量校验、版本切换和恢复机制。这里展示设计与历史资料中的运行口径，不把它写成销售增长结果。</p></div>
-        </div>
-      </article>
-
-      <footer>© 2026 Star · PMPortfolio_star</footer>
+      <footer>© 2026 Star · <a href="#top">返回顶部 ↑</a></footer>
     </main>
   </div>
-  <script>
-    const tabs = [...document.querySelectorAll('[role="tab"]')];
-    const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
-    function showTab(index, focus = false) {
-      tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; panels[i].hidden = i !== index; });
-      if (focus) tabs[index].focus();
-    }
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => showTab(index));
-      tab.addEventListener('keydown', event => {
-        if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-          event.preventDefault();
-          showTab((index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length, true);
-        }
-      });
-    });
-
-    let selectedBatch = 'complete';
-    const batchButtons = [...document.querySelectorAll('[data-batch]')];
-    batchButtons.forEach(button => button.addEventListener('click', () => {
-      selectedBatch = button.dataset.batch;
-      batchButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-    }));
-    document.getElementById('run-intake').addEventListener('click', () => {
-      const passed = selectedBatch === 'complete';
-      const result = document.getElementById('intake-result');
-      const stages = [...document.querySelectorAll('#intake-stages li')];
-      result.querySelector('strong').textContent = passed ? '可发布：候选检查通过' : '已隔离：缺少配对文件';
-      result.querySelector('p').textContent = passed
-        ? '文件齐全并通过示例质量门；正式数据切换为完整的新版本。'
-        : '接收与预检完成，但配对检查未通过。候选加工及正式发布停止，原版本继续可用。';
-      stages.forEach((stage, i) => { stage.className = i < (passed ? 5 : 2) ? 'done' : i === 2 && !passed ? 'blocked' : ''; });
-    });
-
-    const catalogSources = {
-      monthly: { title: '渠道月度销售（合成）', table: 'channel_sales_monthly', grain: '年份 × 月份 × 渠道', route: 'API 接入', timeKeys: ['year','month'], fields: [
-        { key: 'year', label: '年份', hint: '时间键' }, { key: 'month', label: '月份', hint: '时间键' }, { key: 'channel', label: '销售渠道', hint: '分析维度' },
-        { key: 'paid_qty', label: '支付件数', hint: '销量指标' }, { key: 'paid_amount', label: '支付金额', hint: '金额指标' }, { key: 'refund_amount', label: '退款金额', hint: '退款参考' }
-      ]},
-      daily: { title: '商品销售日明细（合成）', table: 'product_sales_daily', grain: '业务日期 × 渠道 × 商品款号', route: '文件投递', timeKeys: ['business_date'], fields: [
-        { key: 'business_date', label: '业务日期', hint: '时间键' }, { key: 'channel', label: '销售渠道', hint: '分析维度' }, { key: 'style_no', label: '商品款号', hint: '按款分析' },
-        { key: 'sale_qty', label: '销售数量', hint: '销量指标' }, { key: 'sale_amount', label: '销售金额', hint: '金额指标' }, { key: 'refund_amount', label: '退款金额', hint: '退款参考' }
-      ]}
-    };
-    let catalogMode = 'monthly';
-    let catalogCart = [];
-    const catalogField = key => catalogSources[catalogMode].fields.find(field => field.key === key);
-    function hideCatalogCommand() { document.getElementById('catalog-command').hidden = true; document.getElementById('catalog-command-text').textContent = ''; }
-    function renderCatalogSource() {
-      const source = catalogSources[catalogMode];
-      document.getElementById('catalog-source').innerHTML = `<article class="catalog-source-card"><div class="catalog-source-head"><div><strong>${source.title}</strong><small>${source.grain}</small></div><span class="catalog-route">${source.route}</span></div><code class="catalog-tech">${source.table}</code><div class="catalog-fields">${source.fields.map(field => `<button type="button" class="catalog-field" data-catalog-field="${field.key}" aria-pressed="${catalogCart.includes(field.key)}"><b>${catalogCart.includes(field.key) ? '✓' : '＋'}</b><span>${field.label}<small>${field.key} · ${field.hint}</small></span></button>`).join('')}</div></article>`;
-      document.querySelectorAll('[data-catalog-field]').forEach(button => button.addEventListener('click', () => {
-        const key = button.dataset.catalogField;
-        catalogCart = catalogCart.includes(key) ? catalogCart.filter(item => item !== key) : [...catalogCart, key];
-        hideCatalogCommand(); renderCatalogSource(); renderCatalogCart();
-      }));
-    }
-    function renderCatalogCart() {
-      document.getElementById('catalog-count').textContent = `${catalogCart.length} 项`;
-      document.getElementById('catalog-generate').disabled = catalogCart.length === 0;
-      document.getElementById('catalog-cart-items').innerHTML = catalogCart.length ? catalogCart.map(key => { const field = catalogField(key); return `<div class="catalog-cart-item"><span>${field.label}</span><code>${field.key}</code><button type="button" data-catalog-remove="${field.key}" aria-label="移除${field.label}">×</button></div>`; }).join('') : '<p>点击字段旁的“＋”加入。</p>';
-      document.querySelectorAll('[data-catalog-remove]').forEach(button => button.addEventListener('click', () => { catalogCart = catalogCart.filter(key => key !== button.dataset.catalogRemove); hideCatalogCommand(); renderCatalogSource(); renderCatalogCart(); }));
-    }
-    function runCatalog() {
-      const question = document.getElementById('catalog-question').value.trim();
-      if (!question) { document.getElementById('catalog-question').focus(); return; }
-      catalogMode = /同比|环比|月度|每月|按月/.test(question) ? 'monthly' : 'daily';
-      catalogCart = [];
-      document.getElementById('catalog-workspace').hidden = false;
-      document.getElementById('catalog-daily-time').hidden = catalogMode !== 'daily';
-      document.getElementById('catalog-monthly-time').hidden = catalogMode !== 'monthly';
-      document.getElementById('catalog-answer').textContent = catalogMode === 'monthly' ? '识别为月度对比：推荐店铺月粒度数据，并把同比基期、环比基期和当前期分别写入命令。' : '识别为按款日销量：推荐商品日粒度数据，并要求先确认开始与结束日期。';
-      document.getElementById('catalog-error').textContent = '';
-      hideCatalogCommand(); renderCatalogSource(); renderCatalogCart();
-    }
-    document.getElementById('run-catalog').addEventListener('click', runCatalog);
-    document.getElementById('catalog-question').addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); runCatalog(); } });
-    document.querySelectorAll('[data-catalog-example]').forEach(button => button.addEventListener('click', () => {
-      document.getElementById('catalog-question').value = button.dataset.catalogExample === 'monthly' ? '比较去年 8 月和今年 8 月的电商销量同比、环比' : '查看今年 8 月 3–17 日按款销量';
-      runCatalog();
-    }));
-    ['catalog-date-from','catalog-date-to','catalog-month-yoy','catalog-month-mom','catalog-month-current'].forEach(id => document.getElementById(id).addEventListener('input', () => { document.getElementById('catalog-error').textContent = ''; hideCatalogCommand(); }));
-    document.getElementById('catalog-generate').addEventListener('click', () => {
-      if (!catalogCart.length) return;
-      const source = catalogSources[catalogMode];
-      let timeLabel = '', timeParams = [];
-      if (catalogMode === 'daily') {
-        const from = document.getElementById('catalog-date-from').value, to = document.getElementById('catalog-date-to').value;
-        const start = new Date(`${from}T00:00:00Z`), end = new Date(`${to}T00:00:00Z`), days = Math.round((end - start) / 86400000) + 1;
-        if (!from || !to || Number.isNaN(days) || days < 1 || days > 366) { document.getElementById('catalog-error').textContent = '请选择 1–366 天的有效日期范围。'; hideCatalogCommand(); return; }
-        timeLabel = `${from} 至 ${to}（含首尾）`; timeParams = [['date_field','business_date'],['date_from',from],['date_to',to]];
-      } else {
-        const periods = ['catalog-month-yoy','catalog-month-mom','catalog-month-current'].map(id => document.getElementById(id).value);
-        if (periods.some(value => !/^\d{4}-\d{2}$/.test(value)) || new Set(periods).size !== periods.length) { document.getElementById('catalog-error').textContent = '三个比较月份必须完整且不能重复。'; hideCatalogCommand(); return; }
-        timeLabel = periods.join('、'); timeParams = [['year_field','year'],['month_field','month'],['periods',periods.join(',')]];
-      }
-      const keys = [...source.timeKeys, ...catalogCart.filter(key => !source.timeKeys.includes(key))];
-      const params = [['name',source.table],['fields',keys.join(',')],...timeParams,[ 'limit','5000' ],[ 'offset','0' ]];
-      const request = `GET <只读数据接口地址>/table?${params.map(([key,value]) => `${key}=${encodeURIComponent(value)}`).join('&')}`;
-      const question = document.getElementById('catalog-question').value.trim();
-      const labels = catalogCart.map(key => { const field = catalogField(key); return `${field.label}（${field.key}）`; }).join('、');
-      document.getElementById('catalog-command-text').textContent = `你是我的数据助理。请只读取数，不要修改数据，也不要扩大字段或时间范围。\n\n业务问题：${question}\n数据集：${source.title}\n数据粒度：${source.grain}\n需要字段：${labels}\n取数时间：${timeLabel}\n\n只读请求：\n${request}\n请求头：Authorization: Bearer <只读令牌>\n\n只接受真实只读结果。若 has_more=true，保持字段与时间参数不变，仅按 next_offset 翻页；不要退回无时间参数的整表取数。字段口径不足或无法访问时，请说明缺口并停止猜测。`;
-      document.getElementById('catalog-error').textContent = '';
-      document.getElementById('catalog-command').hidden = false;
-    });
-    document.getElementById('catalog-copy').addEventListener('click', async () => {
-      const button = document.getElementById('catalog-copy'), text = document.getElementById('catalog-command-text').textContent;
-      try { await navigator.clipboard.writeText(text); button.textContent = '已复制'; } catch { button.textContent = '请手动复制'; }
-      setTimeout(() => { button.textContent = '复制命令'; }, 1600);
-    });
-
-    const temperature = document.getElementById('demo-temperature');
-    function updateWeather() {
-      const value = Number(temperature.value);
-      const delta = value - 20;
-      const signal = Math.abs(delta) >= 5;
-      document.getElementById('temperature-value').textContent = `${value}°C`;
-      const result = document.getElementById('weather-result');
-      result.querySelector('strong').textContent = signal ? '形成候选天气信号' : '未达到演示阈值';
-      result.querySelector('p')?.remove();
-      const paragraph = document.createElement('p');
-      paragraph.textContent = `${delta === 0 ? '与示例常态一致。' : `相对示例常态${delta > 0 ? '偏高' : '偏低'} ${Math.abs(delta)}°C。`}${signal ? '系统提示复核，是否采取业务动作仍由人判断。' : '继续记录事实，无需触发示例预警。'}`;
-      result.appendChild(paragraph);
-    }
-    temperature.addEventListener('input', updateWeather);
-    updateWeather();
-
-    document.getElementById('reset-demo').addEventListener('click', () => {
-      showTab(0);
-      selectedBatch = 'complete';
-      batchButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.batch === 'complete')));
-      const intake = document.getElementById('intake-result');
-      intake.querySelector('strong').textContent = '等待检查';
-      intake.querySelector('p').textContent = '选择一个批次并运行，查看它能否进入正式数据。';
-      document.querySelectorAll('#intake-stages li').forEach(stage => { stage.className = ''; });
-      document.getElementById('catalog-question').value = '比较去年 8 月和今年 8 月的电商销量同比、环比';
-      document.getElementById('catalog-workspace').hidden = true;
-      document.getElementById('catalog-command').hidden = true;
-      document.getElementById('catalog-error').textContent = '';
-      catalogMode = 'monthly'; catalogCart = [];
-      document.getElementById('catalog-date-from').value = '2026-08-03';
-      document.getElementById('catalog-date-to').value = '2026-08-17';
-      document.getElementById('catalog-month-yoy').value = '2025-08';
-      document.getElementById('catalog-month-mom').value = '2026-07';
-      document.getElementById('catalog-month-current').value = '2026-08';
-      temperature.value = '22';
-      updateWeather();
-    });
-  </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
-

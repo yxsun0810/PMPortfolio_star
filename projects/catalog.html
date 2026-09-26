@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="数仓前台案例：用 AI 问数、字段购物车与时间筛选帮助业务人员完成受控取数准备。">
+  <title>数仓前台 · Star 作品集</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳转到正文</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html#top" aria-label="返回 Star 作品集首页"><span class="brand-mark">S<span class="brand-dot">.</span></span><span class="brand-copy"><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="../index.html#top">首页</a><a href="../index.html#overview">精选项目</a><a href="#case-content" aria-current="page">当前案例</a></nav>
+    <div class="header-actions"><button class="theme-toggle" type="button" aria-label="切换夜间模式" aria-pressed="false"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">夜间</span></button><a class="header-cta" href="../index.html#overview">全部项目 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="detail-shell" id="content">
+    <div class="breadcrumb"><a href="../index.html#overview">精选项目</a><span aria-hidden="true">/</span><span>数仓前台</span></div>
+    <section class="detail-hero catalog" aria-labelledby="project-title">
+      <div><div class="kicker">CASE 02 / DATA DISCOVERY</div><h1 id="project-title">让业务人员像购物一样完成取数准备</h1><p>业务人员说出问题，系统推荐恰好的数据集、字段和时间条件，再生成可交给 AI 执行的只读命令。</p><div class="detail-hero-actions"><a class="button button-primary" href="../catalog-demo.html" target="_blank" rel="noopener">体验完整 Demo <span aria-hidden="true">↗</span></a><a class="button button-light" href="#case-content">阅读项目详情 ↓</a></div></div>
+      <div class="detail-hero-visual" aria-hidden="true"><span>说出问题</span><i>→</i><span>选字段</span><i>→</i><span>定时间</span><i>→</i><span>生成命令</span></div>
+    </section>
+    <section class="detail-facts" aria-label="项目概况"><div><span>业务场景</span><strong>自然语言找数、按需选字段</strong></div><div><span>我的参与</span><strong>问数路径、字段选择体验、时间边界、安全取数规则</strong></div><div><span>完整体验</span><strong>独立公开 Demo 页面</strong></div></section>
+    <article class="detail-content" id="case-content">
+      <section><span class="detail-index">01 / PROBLEM</span><h2>问题如何定义</h2><p>业务人员往往只会说“我想看销量同比和环比”，却不知道该选日表还是月表、需要哪些时间键和指标。若直接返回整表，信息会过载，也容易误用字段口径或时间范围。</p></section>
+      <section><span class="detail-index">02 / DECISIONS</span><h2>方案与关键取舍</h2><ul><li>让问数入口先理解业务问题，推荐候选数据集；口径不清时先追问。</li><li>字段同时展示中文业务名和技术字段名，用户通过“＋”加入购物车，最终只请求本次需要的列。</li><li>日数据限定起止日期，月度比较明确列出同比基期、环比基期和当前期；缺少或冲突时停止生成命令。</li><li>生成的命令使用只读接口、分页和权限校验；公开演示只保留占位地址与合成名称。</li></ul></section>
+      <section class="detail-judgment"><span class="detail-index">03 / PRODUCT JUDGMENT</span><h2>核心产品判断</h2><p>“AI 问数”先把模糊问题收敛成最小字段集和明确时间窗口，再交给受控接口执行。界面应让业务人员看懂选择依据和来源，而不是只给一段不可核对的答案。</p></section>
+      <section><span class="detail-index">04 / OUTCOME</span><h2>形成的能力与验证</h2><p>形成自然语言找数、来源说明、字段购物车、日/月时间约束和命令生成闭环。公开 Demo 覆盖连续日期与离散月份两种路径，并阻止无时间范围的整表请求。</p></section>
+    </article>
+    <section class="detail-demo-callout" aria-labelledby="demo-title"><div><span class="detail-index">OPEN DEMO / 公开离线体验</span><h2 id="demo-title">试一次完整的“问数到取数命令”</h2><p>打开数据目录，在右下角点击“AI 问数”，尝试说出电商销量需求；选择字段与时间，再生成取数命令。示例数据与接口均为合成内容。</p></div><a class="button button-primary" href="../catalog-demo.html" target="_blank" rel="noopener">打开数仓前台 Demo <span aria-hidden="true">↗</span></a></section>
+    <nav class="detail-next" aria-label="项目导航"><a href="data-intake.html">← 上一项目：数据接入</a><a href="weather.html">下一项目：天气数据 →</a></nav>
+    <footer>© 2026 Star · PMPortfolio_star</footer>
+  </main>
+  <script src="../site.js" defer></script>
+</body>
+</html>

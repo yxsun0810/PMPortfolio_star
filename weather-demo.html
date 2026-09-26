@@ -4,34 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="天气数仓公开交互演示：像购物一样选择城市、日期与气象指标，再查看合成结果和只读取数需求。">
-  <meta name="theme-color" content="#0d263a">
-  <title>天气数仓 · 问数购物车 Demo</title>
+  <meta name="theme-color" content="#f3eee3">
+  <title>天气数仓 · 数据工作台 Demo</title>
   <link rel="stylesheet" href="weather-demo.css">
   <script src="weather-demo-core.js" defer></script>
   <script src="weather-demo-ui.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#demo-main">跳转到演示</a>
-  <header class="site-header">
-    <a class="brand" href="index.html#overview"><span class="brand-mark">S</span><span><strong>STAR / PM</strong><small>Data product portfolio</small></span></a>
-    <div class="header-right"><span class="demo-status"><i></i> 公开交互演示 · 合成数据</span><a class="back-link" href="index.html#overview">返回作品集 ↗</a></div>
-  </header>
+  <div class="demo-ribbon"><span>PORTFOLIO DEMO</span> 天气数仓 · 公开交互副本 <a href="index.html#demo">返回作品集 ↗</a></div>
+  <div class="workbench-shell">
+    <aside class="workbench-nav" aria-label="天气数仓演示导航">
+      <a class="workbench-brand" href="index.html#overview"><span class="workbench-brand-mark">☁</span><span><strong>天气数仓</strong><small>数据使用工作台 · Demo</small></span></a>
+      <div class="nav-caption">数据工作区</div>
+      <a class="nav-link active" href="#builder"><span>◈</span> 天气问数 <small>01</small></a>
+      <a class="nav-link" href="#city-title"><span>⌖</span> 城市与日期 <small>02</small></a>
+      <a class="nav-link" href="#metric-title"><span>▦</span> 气象指标 <small>03</small></a>
+      <a class="nav-link" href="#results"><span>↗</span> 查询结果 <small>04</small></a>
+      <div class="nav-caption nav-caption-secondary">使用说明</div>
+      <a class="nav-link" href="#data-guide"><span>ⓘ</span> 数据边界</a>
+      <div class="nav-bottom"><span class="status-dot"></span> 公开演示 · 仅合成数据</div>
+    </aside>
 
-  <main id="demo-main" class="shell">
-    <section class="intro">
-      <div class="intro-copy">
-        <span class="eyebrow">WEATHER DATA / INTERACTIVE DEMO</span>
-        <h1>问天气，<em>像购物一样选数据。</em></h1>
-        <p>不必先认识天气表。说出问题，挑选城市、日期和指标；购物车帮你核对范围，结果只展示这次需要的内容。</p>
-        <div class="intro-actions"><button class="primary-button" id="open-ai-top" type="button">✦ AI 问天气</button><a href="#builder" class="secondary-button">直接选数据 ↓</a></div>
-      </div>
-      <div class="intro-art" aria-hidden="true"><span class="art-sun"></span><div class="art-cloud cloud-one"></div><div class="art-cloud cloud-two"></div><div class="art-card"><small>城市 × 日期 × 指标</small><strong>一份刚刚好的天气数据</strong><span>历史实况　/　常年基线　/　预报快照</span></div><svg viewBox="0 0 520 170" preserveAspectRatio="none"><path d="M0 125 C70 110 80 50 155 70 S260 150 330 83 S430 48 520 18" fill="none" stroke="#9ddfda" stroke-width="4" stroke-linecap="round"/></svg></div>
-    </section>
+  <main id="demo-main" class="workbench-main">
+    <header class="workbench-topbar"><div><span class="topbar-eyebrow">WEATHER DATA WORKSPACE</span><h1>天气数据工作台</h1></div><div class="topbar-actions"><span class="topbar-pill">城市 × 日期 × 指标</span><span class="topbar-pill muted-pill">只读需求演示</span><button class="primary-button" id="open-ai-top" type="button">✦ AI 问天气</button></div></header>
+    <div class="workbench-content">
+    <section class="workbench-overview" aria-label="天气数仓使用说明"><div><span class="section-kicker">从问题到数据</span><h2>像购物一样，选出刚好需要的天气数据。</h2><p>可以直接从下方选择城市、日期和指标；也可以点击右侧 AI 按钮，用一句话描述想分析的天气问题。</p></div><div class="overview-flow" aria-hidden="true"><span>提问</span><b>→</b><span>选字段</span><b>→</b><span>看结果</span></div></section>
 
-    <div class="boundary"><strong>演示边界</strong><span>本页所有数值由浏览器生成，是合成样例；不查询真实天气库、不调用 AI 模型，也不复用数仓前台的取数口令。</span></div>
+    <div class="boundary"><strong>演示边界</strong><span>本页数值为浏览器生成的合成样例；不查询真实天气库、不调用 AI 模型，也不复用数仓前台取数口令。</span></div>
 
     <section class="workspace" id="builder" aria-labelledby="builder-title">
-      <div class="section-title"><div><span class="section-kicker">01 / BUILD YOUR QUESTION</span><h2 id="builder-title">把问题装进“天气购物车”</h2></div><p>城市决定看哪里，日期决定看何时，指标决定只取什么。</p></div>
+      <div class="section-title"><div><span class="section-kicker">01 / WEATHER QUESTION</span><h2 id="builder-title">天气问数与选数</h2></div><p>城市决定看哪里，日期决定看何时，指标决定只取什么。</p></div>
       <div id="ai-summary" class="ai-summary" role="status">✦ 已预置一个示例：比较武汉与成都 2025 年 8 月的平均气温和降水，并对照常年。</div>
       <div class="builder-grid">
         <div class="selection-stack">
@@ -46,8 +49,11 @@
 
     <section class="results" id="results" aria-labelledby="result-title"><div class="section-title"><div><span class="section-kicker">02 / ONLY WHAT YOU NEED</span><h2 id="result-title">只看这次选中的结果</h2></div><span class="result-tag">SYNTHETIC DATA · 非真实天气</span></div><div id="result-placeholder" class="result-placeholder">先在购物车确认城市、时间和指标，再生成结果。</div><div id="result-body" class="hidden"><div id="result-intro" class="result-intro"></div><div class="result-grid"><article class="result-card chart-card"><div class="result-card-head"><div><h3>逐日趋势</h3><p>每个城市一条线；可切换已选指标。</p></div><label for="chart-metric">图表指标 <select id="chart-metric"></select></label></div><div id="chart" class="chart"></div><div id="chart-legend" class="chart-legend"></div></article><article class="result-card summary-card"><div class="result-card-head"><div><h3>按城市汇总</h3><p>只汇总购物车里的指标与日期。</p></div></div><div id="summary" class="summary"></div></article></div><article class="result-card handoff"><div class="result-card-head"><div><h3>交给自己 AI 的取数需求</h3><p>这是结构化说明，不是已经执行的真实数仓命令。</p></div><button id="copy-request" class="secondary-button" type="button">复制说明</button></div><textarea id="request-text" readonly aria-label="只读取数需求说明"></textarea><div id="copy-status" class="copy-status" role="status"></div></article></div></section>
 
+    <section class="data-guide panel" id="data-guide" aria-labelledby="data-guide-title"><div><span class="section-kicker">03 / DATA CONTRACT</span><h2 id="data-guide-title">这版演示能做什么？</h2><p>它演示业务人员如何圈定天气取数范围，并生成交给自己 AI 的需求说明。</p></div><div class="guide-grid"><div><strong>历史实况</strong><span>按观测日期查看已发生的天气，可与同日常年基线对照。</span></div><div><strong>预报快照</strong><span>先确定预报制作日，再查看对应的目标日期，保留版本含义。</span></div><div><strong>真实取数</strong><span>尚未接入；演示结果不可用于真实业务判断，不能当成已执行的数仓命令。</span></div></div></section>
     <footer>© 2026 孙宇星 · 天气数据产品公开演示　<a href="projects/weather.html">了解项目判断 →</a></footer>
+    </div>
   </main>
+  </div>
 
   <button id="ai-float" class="ai-float" type="button" aria-controls="ai-panel" aria-expanded="false">✦ <span>AI 问天气</span></button>
   <div id="ai-backdrop" class="ai-backdrop hidden"></div>
